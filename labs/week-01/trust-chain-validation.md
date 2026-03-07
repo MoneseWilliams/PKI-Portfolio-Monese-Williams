@@ -76,3 +76,16 @@ In 3–5 sentences, explain:
 Use your own words.
 
 The Root certificate is called the trust anchor because the Root CA is in the trusted store within the system which helps hold the entire chain together. this allows the system to validate the certificates issued below it. Validation walks the certificate chain by starting from the end entity and working its way up to the Root CA. if the Root Ca was not trusted within the validation process the chain will then become broken
+
+Stretch (Optional)
+
+- The second HTTPS site i chose to inspeact is Youtube.com
+https://www.youtube.com/
+
+-The Root Ca is Different from Capital One, Youtube Root Ca is named GTS Root 4
+
+-The Intermediate is different and named WE2
+
+- This tells me that certificates can be issued from diffrent Root and Intermeditae CA for different sites 
+
+
