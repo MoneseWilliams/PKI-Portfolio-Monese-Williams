@@ -20,3 +20,7 @@ reflections/week-XX.md
 - Did you document clearly? Yes
 - Did you use structured formatting? Yes
 - Was your commit message meaningful? Yes
+
+Which PKI-related role feels aligned with you right now — and why?
+
+A PKI related role that feels most aligned with me right now is IAM + PKi but i am also very interested in PKI engineer which is role where if i could start their as a beginner in cybersecurity i would be happy and excited to start. for now IAM seems more of a path for me since it seems more beginner friendly with the main role of verifying how organizations are able to create and verify user accounts, devices and services before granting any access following the zero trust policy. i can say though after doing the certificate inspection lab, key pair generation lab, and the mini trust chain validation lab i was able to seee how PKI works with IAM with certificates being public with publick keys that are paired with private keys that actually prove control of the identity meanwhile IAM verifies the identity after the proof of the identity has already been done.
