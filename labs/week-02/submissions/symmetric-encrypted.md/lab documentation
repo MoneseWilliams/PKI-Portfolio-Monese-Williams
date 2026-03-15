@@ -31,30 +31,6 @@ GitHub cannot be used to run any programs, only storing files
 
 5. Lastly, i used the diff command to compare the original plaintext file to the decrypted file. After running the command, no output appeared verifying the integrity of the two files. This verified that the encryption and decryption process worked correctly without any alterations to the original data
 
----
-
-## Part 3 — Observations
-
-Students should document:
-
-- What happened
-- Why it happened
-- What surprised them
-- Any errors encountered
-
----
-
-## Submission (Portfolio Repo)
-
-Create:
-
-- labs/week-XX/[lab-name].md
-
-Include:
-
-- Screenshots (if applicable)
-- Notes
-- Short explanation of outcome
 
 ---
 
