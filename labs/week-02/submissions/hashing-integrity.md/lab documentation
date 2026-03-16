@@ -1,17 +1,18 @@
 # Lab — Hashing Integrity
 
 ## Overview
-Briefly describe the purpose of this lab in your own words.  
-What PKI concept or system behavior were you investigating?
+The purpose of thie lab is to understand how cryptographic hashing helps protect the integrity of transfered data. 
+
+In this lab 
 
 ---
 
 ## Environment
 Document the environment used to complete the lab.
 
-- Operating System:
-- Terminal Used:
-- OpenSSL Version (if applicable):
+- Operating System: macOS
+- Terminal Used:Macbook Pro
+- OpenSSL Version (if applicable): OpenSSL Installed on macOS
 
 ---
 
@@ -21,9 +22,11 @@ Summarize the key steps you performed to complete the lab.
 Do **not copy the lab instructions**.  
 Describe what you actually did.
 
-1.  
-2.  
-3.  
+1.  First I accessed my repository on my terminal and created a file folder named hashes to store my lab artifacts. After that, I then proceeded to verify that the folder 'hashes' was succussfully created within the repository   
+2.  Next, i wrote a text file "Week 2 Hashing Lab - CVI" into the hashes folder and then verified the file was created correctly and contained the message and readable
+3.  Then, i generated a SHA-256 Hash file and viewed it. The Hash file showed a long string of unreadable text in hexadeciaml format which represents a unique digital footprint 
+4.  Next, i modified the text file and included the word "tampered". I then verified the modification was implemented and proceeded to generate a new Hash file with the modified text and verified the new hash file and compared it to the first one which shows that one minor change did create a new digital fingerprint showing how hasing supports and verifies the integrity of data
+
 
 ---
 
