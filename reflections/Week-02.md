@@ -1,13 +1,9 @@
 # Week 2 Reflection
-
-Submit this in your portfolio repository:
-reflections/week-XX.md
-
 ---
 
 ## Prompts
 
-1. What did you learn this week?
+1. This week i've learned the fundamentals of cryptography. I was able to determine the differences between Symmetric Encryption and Asymmetric Cryptography and how they're both used during the TLS handshake, also understanding what hashing is and how important it is when transmitting data between systems supporting the security property integrity. 
 2. What concept was most challenging?
 3. Where does this concept appear in real-world systems?
 4. How would you explain this topic to a non-technical audience?
