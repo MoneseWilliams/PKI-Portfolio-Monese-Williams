@@ -1,4 +1,4 @@
-# Lab — Certificate Misconfiguration
+# Lab — Certificate Misconfigurations
 
 ## Overview
 Briefly describe the purpose of this lab in your own words.  
