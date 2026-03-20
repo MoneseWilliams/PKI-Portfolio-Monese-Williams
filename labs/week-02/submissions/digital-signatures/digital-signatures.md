@@ -30,7 +30,7 @@ Summarize the key steps you performed to complete the lab.
 
 The digital signature was successfully created using the private key. When i verified the signature using the public key before modifying the file, the output then returned back as "Verified OK". After modifying the file by adding additional text to it, i ran the verification again and the output returned a verification failure. This confirmed that the signature no longer matched the modified data.
 
-![Digital Signature](assets/screenshots/week-02/digital-signatures.png)
+![Digital Signature](assets/screenshots/week-02/digital-signatures.png) 
 
 ---
 
