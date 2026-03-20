@@ -9,10 +9,10 @@ What PKI concept or system behavior were you investigating?
 ## Environment
 Document the environment used to complete the lab.
 
-- Operating System:
-- Terminal Used:
-- OpenSSL Version (if applicable):
-
+- Operating System: macOS
+- Terminal Used: Terminal
+- OpenSSL Version (if applicable): OpenSSL 3.6.0
+  
 ---
 
 ## Steps Performed
