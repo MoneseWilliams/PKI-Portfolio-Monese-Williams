@@ -1,25 +1,20 @@
-# Lab — Symmetric Encryption (Confidentiality)
+# Lab — Symmetric Encrypted (Confidentiality)
 
-## Goal
-This lab will help me udnerstand the process of how symmetric encryption is used to protect a file using AES and the importance of confidentiality within security.
-
----
-
-## Part 1 — Setup
-
-List any prerequisites or tools required.
-
-- Use OpenSSl
-- Access to a terminal using my Macbook
-- created week 2 portfolio
-
-All commands must be executed on my own computer 
-GitHub cannot be used to run any programs, only storing files
-
+## Overview
+the purpose of thie lab is to help me understand how Symmetric Encryption is used to protect data using AES and the importance of the security properity confidentiality.
 
 ---
 
-## Part 2 — Execution Steps
+## Environment
+Document the environment used to complete the lab.
+
+- Operating System: macOS
+- Terminal Used:Terminal
+- OpenSSL Version (if applicable): OpenSSL 3.6.0
+
+---
+
+## Steps Performed
 
 1. First I cloned my Github Repository into my terminal by copying the link from the root of my directory and using the git clone command, after the clone was completed,  i opened my repository in my terminal and used the mkdir -p command to create the encrypted folder where the files from this lab will be stored
    
@@ -31,15 +26,67 @@ GitHub cannot be used to run any programs, only storing files
 
 5. Lastly, i used the diff command to compare the original plaintext file to the decrypted file. After running the command, no output appeared verifying the integrity of the two files. This verified that the encryption and decryption process worked correctly without any alterations to the original data
 
-
 ---
 
 ## Results
 
-assets/screenshots/week-02/Before encrytion.png
-assets/screenshots/week-02/decryption.png
-assets/screenshots/week-02/encryption.png
+- After succuessfully doing this lab i was able to see that the file created was encryoted using AES-256 and became unreadable when opened. A password was then used to decrypt the file and convert it back to a readable file with the same data it obtained before. 
 
-## Stretch (Optional)
+If you include screenshots, store them in `assets/screenshots/` at the root of your repo and reference them here.
 
-Advanced challenge for s
+**How to embed an image:**
+
+**Option A — Terminal / Local Editor**
+
+Save your screenshot to `assets/screenshots/` in your repo, then reference it using a relative path from your submission file:
+
+```markdown
+![Description of your screenshot](../../../assets/screenshots/your-filename.png)
+```
+
+> The `../../../` moves up three levels: `submissions/` → `week-03/` → `labs/` → repo root, then into `assets/screenshots/`.
+
+**Option B — GitHub Web (Easiest)**
+
+Open your `.md` file on GitHub, click the pencil icon to edit, then **drag and drop your image directly into the text editor**. GitHub will upload it automatically and insert the correct link for you.
+
+Example of what an embedded image looks like:
+
+```markdown
+![Certificate output showing SAN field](../../../assets/screenshots/san-field.png)
+```
+
+---
+
+## Key Findings
+
+- Symmetric Encryption uses one key to encrypt and decrypt the same file, protecting the data from attackers
+
+- Both encrypted and decrypted files contained the same data with no modifications 
+
+- When the wrong password is used the file will not be decrypted 
+
+---
+
+## Explanation
+
+- The results matter because they demonstrate the security propertiy Confidentiality. For example, Symmetric Encryption is usdd to protect data from attackers while in transimittion and ensures that only users with the correct key will have access to the data and this will be important in the real world systems like TLS when a secure connection has been established for data transmittion to being.
+
+---
+
+## Challenges / Troubleshooting
+
+-One challenge was understanding the correct commands and file paths when using OpenSSL. At times, the commands would not work due to incorrect paths. This was resolved by verifying my current directory and adjusting the file paths accordingly.
+
+
+---
+
+## Artifacts
+
+- plaintext.txt
+- plaintext.txt.enc
+- plaintext.decrypted.txt
+
+---
+
+*CVI PKI Career Pathway — Foundations Phase*
