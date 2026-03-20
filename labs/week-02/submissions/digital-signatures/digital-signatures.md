@@ -57,7 +57,9 @@ One issue encountered during the lab was making sure the correct file paths were
 ## Artifacts
 
 -artifact.txt
+
 -artifact.sig
+
 -public_key.pem
 
 ---
