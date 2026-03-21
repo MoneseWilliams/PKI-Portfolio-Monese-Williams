@@ -18,14 +18,14 @@ What PKI concept were you investigating?
 
 | Field                | Value from your output |
 |----------------------|------------------------|
-| Version              |                        |
-| Serial Number        |                        |
-| Signature Algorithm  |                        |
+| Version              |  Version: 3            |
+| Serial Number        | aa:23:02:42:8e:f4:39:7e:10:bb:2c:32:93:1c:fc:2e|
+| Signature Algorithm  |ecdsa-with-SHA256       |
 | Issuer               |C=US, O=Google Trust Services, CN=WE2|
-| Subject              |                        |
-| Not Before           |                        |
-| Not After            |                        |
-| Public Key Algorithm |                        |
+| Subject              |CN=*.google.com         |
+| Not Before           |Feb 23 18:19:56 2026 GMT|
+| Not After            |May 18 18:19:55 2026 GMT|
+| Public Key Algorithm |id-ecPublicKey          |
 
 ---
 
