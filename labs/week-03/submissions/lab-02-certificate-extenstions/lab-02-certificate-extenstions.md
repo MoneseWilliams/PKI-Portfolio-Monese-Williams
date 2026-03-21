@@ -39,6 +39,17 @@ CA:FALSE
 
 1. The SAN field contains multiple domains such as *.google.com, *.youtube.com, *.android.com and *.gstatic.cn
 2. Based on the key usage this certificate is allowed to perfom digital signatures
-3. the EKU field tells me that the purpose of this certificate is TLS Web Server Authetication and when a browser connects to a website, it can check this certificate and verify that it is allowed for server authetication
-4. This is not a CA certificate because for the extension Basic Constraints it populates critical CA=FALSE veirfying that this certficate does not have the permssion to issue certificates 
+3. the EKU field tells me that the purpose of this certificate is TLS Web Server Authentication and when a browser connects to a website, it can check this certificate and verify that it is allowed for server authentication
+4. This is not a CA certificate because for the extension Basic Constraints it populates critical CA=FALSE verifying that this certificate does not have the permission to issue certificates 
 5. The SAN matters more than the Subject CN field in modern TLS because it defines the different identities the certificate represents. SAN allows multiple identities to exist in one certificate instead of issuing multiple certificates.
+
+---
+
+## Stretch
+
+For this lab i decided to also compare the certificate extensions from Google to Netflix certificate and this is my findings
+
+1. Both certificates have very different SAN entries with Google having an excessive amount of domains that aren't just Google but also include Youtube, Android, and Gstatic. Netflix strictly only has domain names with Netflix ( DNS:account.netflix.com, DNS:ca.netflix.com, DNS:develop-stage.netflix.com, DNS:embed.develop-stage.netflix.com, DNS:embed.release-stage.netflix.com, DNS:netflix.ca, DNS:netflix.com, DNS:release-stage.netflix.com, DNS:signup.netflix.com, DNS:tv.netflix.com, DNS:www.netflix.ca, DNS:www.netflix.com, DNS:www1.netflix.com, DNS:www2.netflix.com, DNS:www3.netflix.com)
+2. Both certificates are allowed the same key usage of Digital Signature but, Netflix has one more extra permission that Google doesn't and which is Key Agreement
+3.  Both certificates do not have the authority to issue certificates and the only extra extension between the two would be Netflix having the extra permission from key usage of Key Agreement
+
