@@ -38,7 +38,7 @@ CA:FALSE
 ## Observations
 
 1. The SAN field contains multiple domains such as *.google.com, *.youtube.com, *.android.com and *.gstatic.cn
-2. Based on the key usage 
-3. What does the EKU field tell you about this certificate's purpose?
-4. Is this a CA certificate? How can you tell?
-5. Why does SAN matter more than the Subject CN field in modern TLS?
+2. Based on the key usage this certificate is allowed to perfom digital signatures
+3. the EKU field tells me that the purpose of this certificate is TLS Web Server Authetication and when a browser connects to a website, it can check this certificate and verify that it is allowed for server authetication
+4. This is not a CA certificate because for the extension Basic Constraints it populates critical CA=FALSE veirfying that this certficate does not have the permssion to issue certificates 
+5. The SAN matters more than the Subject CN field in modern TLS because it defines the different identities the certificate represents. SAN allows multiple identities to exist in one certificate instead of issuing multiple certificates.
