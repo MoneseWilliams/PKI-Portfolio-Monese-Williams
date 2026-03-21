@@ -1,101 +1,40 @@
-# Lab — Certificate Extensions
+
+# Lab 02 — Investigate Certificate Extensions
 
 ## Overview
-Briefly describe the purpose of this lab in your own words.  
-What PKI concept or system behavior were you investigating?
+Briefly describe what this lab was about in your own words.
+What PKI concept were you investigating?
 
 ---
 
 ## Environment
-Document the environment used to complete the lab.
+- OS:macOS
+- Terminal used (Mac Terminal / Git Bash / WSL):Mac Terminal
+- OpenSSL version ('OpenSSL 3.6.0')
 
-- Operating System: macOS
-- Terminal Used: Terminal
-- OpenSSL Version (if applicable): OpenSSL 3.6.0
-
----
-
-## Steps Performed
-Summarize the key steps you performed to complete the lab.
-
-Do **not copy the lab instructions**.  
-Describe what you actually did.
-
-1.  
-2.  
-3.  
 
 ---
 
-## Results
-Include the important outputs or findings from the lab.
+## Extensions Found
 
-Examples may include:
+### Subject Alternative Name (SAN)
+Paste the value from your output:
 
-- command outputs
-- certificate fields
-- verification results
-- screenshots (if applicable)
+### Key Usage
+Paste the value from your output:
 
-If you include screenshots, store them in the **assets folder** and reference them here.
+### Extended Key Usage (EKU)
+Paste the value from your output:
 
-Example:
-
-![Certificate Output](assets/certificate-output.png)
+### Basic Constraints
+Paste the value from your output:
 
 ---
 
-## Key Findings
-Document the most important observations from the lab.
+## Observations
 
-Examples:
-
-- Certificate issuer
-- Public key algorithm used
-- Certificate extensions present
-- Trust chain relationships
-- Validation results
-
-•  
-•  
-•  
-
----
-
-## Explanation
-Explain **why the results matter**.
-
-Examples:
-
-- Why the issuer is important in PKI
-- Why SAN is required for modern TLS validation
-- Why the certificate chain validates successfully
-- Why a misconfiguration would cause a failure
-
----
-
-## Challenges / Troubleshooting
-Document any issues encountered during the lab and how you resolved them.
-
-Examples:
-
-- command errors
-- missing intermediate certificates
-- verification failures
-
----
-
-## Artifacts
-List the files generated during this lab.
-
-Examples:
-
-- leaf_cert.pem
-- server.pem
-- intermediate.pem
-- root.pem
-- screenshots stored in assets/
-
----
-
-CVI PKI Career Pathway — Foundations Phase
+1. What domains appear in the SAN field?
+2. What is this certificate authorized to do based on Key Usage?
+3. What does the EKU field tell you about this certificate's purpose?
+4. Is this a CA certificate? How can you tell?
+5. Why does SAN matter more than the Subject CN field in modern TLS?
