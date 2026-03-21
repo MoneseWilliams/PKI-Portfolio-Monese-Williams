@@ -1,8 +1,7 @@
 # Lab 01 — Inspect X.509 Certificate Fields
 
 ## Overview
-Briefly describe what this lab was about in your own words.
-What PKI concept were you investigating?
+In this lab I was able to learn that X.509 certificates is the standrad structure for digital certificates in PKI. I then implemented this knowledge using my local Mac terminal and OpenSSL to analyze the fields instead of relying on a web browser. X.509 certificates helps establsih trust and identity within PKI systems
 
 ---
 
