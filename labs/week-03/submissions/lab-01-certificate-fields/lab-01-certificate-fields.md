@@ -1,4 +1,3 @@
-
 # Lab 01 — Inspect X.509 Certificate Fields
 
 ## Overview
@@ -31,8 +30,8 @@ What PKI concept were you investigating?
 
 ## Observations
 
-1. Who issued the certificate?
-2. What domain or organization does it represent?
-3. When does it expire?
-4. What public key algorithm is used?
-5. Why does the Issuer field matter in a PKI system?
+1. This certificate was issued by C=US, O=Google Trust Services, CN=WE2
+2. This certificate represents *.google.com
+3. This certificate will expire May 18 18:19:55 2026 GMT
+4. The public key algorithim used is id-ecPublicKey
+5. The issuer field matters in a PKI system because it allows the browser to verify the certificate authority who issued and signed the certficate and use it to verify the trust chain up to the root 
