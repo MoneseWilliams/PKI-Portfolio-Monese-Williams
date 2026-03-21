@@ -34,3 +34,14 @@ In this lab I was able to learn that X.509 certificates is the standrad structur
 3. This certificate will expire May 18 18:19:55 2026 GMT
 4. The public key algorithim used is id-ecPublicKey
 5. The issuer field matters in a PKI system because it allows the browser to verify the certificate authority who issued and signed the certficate and use it to verify the trust chain up to the root 
+
+---
+
+## Stretch
+
+I decided i wanted to go a step further and compare this Google certificate to a different website. The website I chose is Netflix
+
+1. the issuer fields do not match since the issuer for netflix is C=US, O=DigiCert Inc, CN=DigiCert Global G3 TLS ECC SHA384 2020 CA1 and Google is C=US, O=Google Trust Services, CN=WE2
+2. Both certificates do use the same public key algorithim id-ecPublicKey
+3. The validity periods for both certificates do not match. For Netflixs certificate expires Feb 18 21:41:48 2027 GMT and Googles certificate expires May 18 18:19:55 2026 GMT
+4. The subject field are not structured the same way for Google it only populates as CN=*.google.com but for Netflix it populates as C=US, ST=California, L=Los Gatos, O=Netflix, CN=www.netflix.com. from my observation Netflix outputs more information for the subject field.  
