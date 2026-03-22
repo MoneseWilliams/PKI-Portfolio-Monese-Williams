@@ -1,101 +1,51 @@
-# Lab — Certificate Misconfigurations
+
+# Lab 04 — Detect Certificate Misconfigurations
 
 ## Overview
-Briefly describe the purpose of this lab in your own words.  
-What PKI concept or system behavior were you investigating?
+Briefly describe what this lab was about in your own words.
+What PKI concept were you investigating?
 
 ---
 
-## Environment
-Document the environment used to complete the lab.
+## Scenario 1 — Missing Subject Alternative Name
 
-- Operating System: macOS
-- Terminal Used: Terminal
-- OpenSSL Version (if applicable): OpenSSL 3.6.0
-  
----
+**Would modern browsers trust this certificate?**
+[Your answer]
 
-## Steps Performed
-Summarize the key steps you performed to complete the lab.
-
-Do **not copy the lab instructions**.  
-Describe what you actually did.
-
-1.  
-2.  
-3.  
+**Analysis:**
+[Explain why SAN is required, why CN is not sufficient, and what error users would see]
 
 ---
 
-## Results
-Include the important outputs or findings from the lab.
+## Scenario 2 — Incorrect Extended Key Usage
 
-Examples may include:
+**Would a browser accept this certificate for a web server?**
+[Your answer]
 
-- command outputs
-- certificate fields
-- verification results
-- screenshots (if applicable)
-
-If you include screenshots, store them in the **assets folder** and reference them here.
-
-Example:
-
-![Certificate Output](assets/certificate-output.png)
+**Analysis:**
+[Explain what EKU defines, what value is required for HTTPS, and what error users would see]
 
 ---
 
-## Key Findings
-Document the most important observations from the lab.
+## Scenario 3 — Expired Certificate
 
-Examples:
+**What happens if this certificate is used today?**
+[Your answer]
 
-- Certificate issuer
-- Public key algorithm used
-- Certificate extensions present
-- Trust chain relationships
-- Validation results
-
-•  
-•  
-•  
+**Analysis:**
+[Explain why expiration fails validation, why lifecycle management matters, and what users would see]
 
 ---
 
-## Explanation
-Explain **why the results matter**.
+## Scenario 4 — Missing Intermediate Certificate
 
-Examples:
+**Can the browser build a complete trust chain?**
+[Your answer]
 
-- Why the issuer is important in PKI
-- Why SAN is required for modern TLS validation
-- Why the certificate chain validates successfully
-- Why a misconfiguration would cause a failure
+**Analysis:**
+[Explain why the full chain must be served, what happens when the intermediate is missing, and how this is fixed]
 
 ---
 
-## Challenges / Troubleshooting
-Document any issues encountered during the lab and how you resolved them.
-
-Examples:
-
-- command errors
-- missing intermediate certificates
-- verification failures
-
----
-
-## Artifacts
-List the files generated during this lab.
-
-Examples:
-
-- leaf_cert.pem
-- server.pem
-- intermediate.pem
-- root.pem
-- screenshots stored in assets/
-
----
-
-CVI PKI Career Pathway — Foundations Phase
+## Key Takeaway
+What is the most important thing you learned about certificate misconfigurations from this lab?
