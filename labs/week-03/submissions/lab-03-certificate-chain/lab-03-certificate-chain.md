@@ -23,7 +23,7 @@ server.pem: OK
 
 | Certificate  | Role                        | Key Indicator                    |
 |--------------|-----------------------------|----------------------------------|
-| root.pem     | CA: TRUE                    | Digital Signature, Certificate Sign, CRL Sign|
+| root.pem     | CA: TRUE                    |  Certificate Sign, CRL Sign      |
 | intermediate.pem | CA: TRUE                | Digital Signature, Certificate Sign, CRL Sign|
 | server.pem   | CA: FALSE                   | Digital Signature                            |
 
