@@ -32,7 +32,11 @@ server.pem: OK
 ## Observations
 
 1. After finding the correct Root Ca the chain did verify succussfully and the output said server.pem: OK verifying it was succesful
-2. I identified the root CA by checking the subject and issuer fields of the certificates and noticing that the true root is the one where the subject and issuer match, meaning it is self-signed. I also confirmed it by checking Keychain Access and finding the certificate that sits at the top of the trust chain, by typing in the name of the issuer for the 3rd cert block and it populating USERTrust ECC CERTIFICATION AUTHORITY verifying that was the actual cert after getting 
-3. How did you identify the intermediate CA?
-4. What field confirms whether a certificate can issue other certificates?
-5. Why does removing the intermediate certificate break the chain?
+
+2. I identified the Root CA by checking the subject and issuer fields of the certificates and noticing that the true root is the one where the subject and issuer match, meaning it is self-signed. For this specifice certificate i had to dig deeper and find the correct Root Ca in keychain access and searching for the correct one since the 3 certficae block was issued by USERTrust ECC Certification Authority. Once searching and confirming this was in my trust systems trust store I verified that the subject and issuer did match verifying that this was the true Root CA
+   
+3. I was able to identify the intermediate Ca by checking the basic constraints and seeing its CA:TRUE meaning this CA can also issue certs but its not self signed like the Root Ca
+
+5. The basic constraints field will provide the information on wether or not a certificate has the autorization to issue out certificates
+   
+6. Removing the intermediate certificate will break the chain because the system has to move up the chain and verify who issued certificates to who and is the issuer a valid certificate authority. If the intermediate ca is missing the system would be unable to verify who issued the cert to the leaf certificate since that helps link the leaaf cert to the root ca automatically failing the verification check
