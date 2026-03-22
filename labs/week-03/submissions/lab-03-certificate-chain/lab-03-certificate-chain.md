@@ -40,3 +40,13 @@ server.pem: OK
 5. The basic constraints field will provide the information on wether or not a certificate has the autorization to issue out certificates
    
 6. Removing the intermediate certificate will break the chain because the system has to move up the chain and verify who issued certificates to who and is the issuer a valid certificate authority. If the intermediate ca is missing the system would be unable to verify who issued the cert to the leaf certificate since that helps link the leaaf cert to the root ca automatically failing the verification check
+
+--
+
+## Stretch
+
+I wanted to see if verification would still work without the intermediate certificate, so I attempted to verify the certificate using OpenSSL. The output returned “server.pem: verification failed,” which I expected. This is because the intermediate certificate is required to complete the trust chain, as it links the leaf certificate to the root CA. Without it, the system cannot properly validate the certificate.
+
+## Why This Matters
+
+This matters because, in order to establish a secure TLS connection, the system must verify that the certificate issued to the server is valid. To do this, the system verifies that the certificate was issued by a trusted intermediate CA and then traces that CA back to a trusted root CA.
