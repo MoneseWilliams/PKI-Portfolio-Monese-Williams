@@ -1,4 +1,3 @@
-
 # Lab 03 — Verify a Certificate Chain
 
 ## Overview
@@ -8,9 +7,9 @@ What PKI concept were you investigating?
 ---
 
 ## Environment
-- OS:
-- Terminal used (Mac Terminal / Git Bash / WSL):
-- OpenSSL version (`openssl version`):
+- OS: macOS
+- Terminal used (Mac Terminal / Git Bash / WSL):Mac Terminal
+- OpenSSL version (`OpenSSL 3.6.0'):
 - Website used: github.com
 
 ---
