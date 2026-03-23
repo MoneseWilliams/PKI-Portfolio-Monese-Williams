@@ -1,4 +1,3 @@
-
 # Lab 04 — Detect Certificate Misconfigurations
 
 ## Overview
@@ -10,7 +9,9 @@ What PKI concept were you investigating?
 ## Scenario 1 — Missing Subject Alternative Name
 
 **Would modern browsers trust this certificate?**
-[Your answer]
+Subject: CN=example.com
+
+Modern browsers will not trute this certificate without the Subject Alternative Name (SAN)
 
 **Analysis:**
 [Explain why SAN is required, why CN is not sufficient, and what error users would see]
