@@ -1,8 +1,7 @@
 # Lab 05 — Extract a Certificate from a Live Website
 
 ## Overview
-Briefly describe what this lab was about in your own words.
-What PKI concept were you investigating?
+This lab was about breaking down a real certificate and understanding what each field means. I was mainly learning how certificate fields like SAN, EKU, and issuer help define identity and trust in PKI.
 
 ---
 
