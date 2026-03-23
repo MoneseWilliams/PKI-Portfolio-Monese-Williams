@@ -1,4 +1,3 @@
-
 # Lab 05 — Extract a Certificate from a Live Website
 
 ## Overview
