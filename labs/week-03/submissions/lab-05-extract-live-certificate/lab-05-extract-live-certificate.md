@@ -18,21 +18,21 @@ What PKI concept were you investigating?
 
 | Field                    | Value from your output |
 |--------------------------|------------------------|
-| Subject                  |                        |
-| Issuer                   |                        |
-| Not Before               |                        |
-| Not After                |                        |
-| Public Key Algorithm     |                        |
-| Subject Alternative Name |                        |
-| Key Usage                |                        |
-| Extended Key Usage       |                        |
+| Subject                  |CN=*.tiktok.com         |
+| Issuer                   |C=US, O=DigiCert Inc, OU=www.digicert.com, CN=RapidSSL TLS ECC CA G1|
+| Not Before               |Jun 16 00:00:00 2025 GMT|
+| Not After                |Jun 15 23:59:59 2026 GMT|
+| Public Key Algorithm     |id-ecPublicKey          |
+| Subject Alternative Name | DNS:*.tiktok.com, DNS:tiktok.com|
+| Key Usage                |Digital Signature, Key Agreement|
+| Extended Key Usage       |TLS Web Server Authentication, TLS Web Client Authentication|
 
 ---
 
 ## Observations
 
-1. What organization does this certificate belong to?
-2. Which Certificate Authority issued it?
-3. When does it expire?
-4. What domains are listed in the SAN field?
-5. What is this certificate authorized to be used for?
+1. The organization this certificate belong to is CN=*.tiktok.com 
+2. The certificate was issued by DigiCert Inc, specifically the RapidSSL TLS ECC CA G1 which is the intermediate certificate authority.
+3. The certificate expires on June 15, 2026 at 23:59:59 GMT.
+4. The domains listed in the SAN field are DNS:*.tiktok.com, DNS:tiktok.com
+5. What is this certificate authorized to be used for? The certificate is authorized for TLS Web Server Authentication, TLS Web Client Authentication
