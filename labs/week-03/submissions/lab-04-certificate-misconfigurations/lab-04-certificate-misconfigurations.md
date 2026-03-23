@@ -16,6 +16,7 @@ Modern browsers will not trute this certificate without the Subject Alternative 
 **Analysis:**
 [Explain why SAN is required, why CN is not sufficient, and what error users would see]
 
+khc
 ---
 
 ## Scenario 2 — Incorrect Extended Key Usage
