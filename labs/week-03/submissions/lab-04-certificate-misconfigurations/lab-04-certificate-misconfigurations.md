@@ -1,8 +1,7 @@
 # Lab 04 — Detect Certificate Misconfigurations
 
 ## Overview
-Briefly describe what this lab was about in your own words.
-What PKI concept were you investigating?
+This lab focused on certificate misconfigurations and how they cause validation failures. I explored how issues like missing intermediates, incorrect extensions, and expired certificates break trust in PKI.
 
 ---
 
