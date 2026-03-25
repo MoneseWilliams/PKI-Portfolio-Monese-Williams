@@ -23,6 +23,8 @@ Summarize the key steps you performed. Do not copy the lab instructions — desc
 - What did the diff output show after converting PEM → DER → PEM?
 - What information was displayed when you verified the PFX?
 
+![Description of your screenshot](../../../assets/screenshots/your-filename.png)
+
 ## Key Findings
 
 ## Explanation
