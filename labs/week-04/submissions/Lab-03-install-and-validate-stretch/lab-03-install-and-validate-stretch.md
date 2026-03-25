@@ -20,6 +20,8 @@ Briefly describe what this lab was about in your own words. What PKI concept or 
 - What did the verify output return after signing — before and after cleanup?
 - What confirmed the trust chain was established?
 
+![Description of your screenshot](../../../assets/screenshots/your-filename.png)
+
 ## Key Findings
 
 ## Explanation
