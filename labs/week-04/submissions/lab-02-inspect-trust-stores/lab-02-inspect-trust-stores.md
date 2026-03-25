@@ -19,6 +19,8 @@ Briefly describe what this lab was about in your own words. What PKI concept or 
 - Name at least one specific root CA you inspected. Include its Subject and expiration date.
 - What did the verify return code output tell you?
 
+![Description of your screenshot](../../../assets/screenshots/your-filename.png)
+
 ## Key Findings
 
 ## Explanation
