@@ -1,19 +1,18 @@
 # Lab 01 — Convert Certificate Formats
 
 ## Overview
-Briefly describe what this lab was about in your own words. What PKI concept or system behavior were you investigating?
+n this lab, I will be understanding one of the most common issues PKI engineers face but may not realize until they come across it. This lab will help me better understand PEM, DER, and PFX certificate formats and how to convert them using OpenSSL. This contributes to the concept in PKI that certificates do not change when converting formats, only the encoding changes.
 
 ## Environment
-- Operating System:
-- Terminal Used:
-- OpenSSL Version (openssl version):
+- Operating System:macOS
+- Terminal Used:Terminal
+- OpenSSL Version (openssl version):OpenSSL 3.6.0
 
 ## Steps Performed
-Summarize the key steps you performed. Do not copy the lab instructions — describe what you actually did.
 
-1.
-2.
-3.
+1. To begin this lab, I determined I first wanted to obtain a certificate in PEM format. I chose google.com as my website and used OpenSSL to retrieve the leaf certificate from the site. I then saved it as a file named leaf_cert.pem.
+2.I then created a directory to store all of my artifacts for each file conversion I chose to perform. After that, I moved my leaf certificate PEM file into that directory for better organization.
+3. The BEGIN and END lines of the leaf certificate confirm that the encoding is in PEM format. I then opened the file to observe the X.509 certificate and converted the file into DER format using OpenSSL.
 4.
 5.
 
