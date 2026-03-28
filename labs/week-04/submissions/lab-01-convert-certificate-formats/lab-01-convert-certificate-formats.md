@@ -12,15 +12,15 @@ n this lab, I will be understanding one of the most common issues PKI engineers 
 
 1. To begin this lab, I determined I first wanted to obtain a certificate in PEM format. I chose google.com as my website and used OpenSSL to retrieve the leaf certificate from the site. I then saved it as a file named leaf_cert.pem.
    
-2.I then created a directory to store all of my artifacts for each file conversion I chose to perform. After that, I moved my leaf certificate PEM file into that directory for better organization.
+2. I then created a directory to store all of my artifacts for each file conversion I chose to perform. After that, I moved my leaf certificate PEM file into that directory for better organization.
 
 3. The BEGIN and END lines of the leaf certificate confirm that the encoding is in PEM format. I then opened the file to observe the X.509 certificate.
    
-4 Next, I converted the PEM file into DER format using OpenSSL and named it leaf_cert.der. I then opened the DER file in a readable format to confirm it was valid. I observed that the file still contained the same information as the PEM format, confirming that format conversion does not change the actual certificate, only the encoding. I also opened the DER file and noticed it was full of random characters and spaces, verifying it is in DER format.
+4. Next, I converted the PEM file into DER format using OpenSSL and named it leaf_cert.der. I then opened the DER file in a readable format to confirm it was valid. I observed that the file still contained the same information as the PEM format, confirming that format conversion does not change the actual certificate, only the encoding. I also opened the DER file and noticed it was full of random characters and spaces, verifying it is in DER format.
 
-5.After successfully converting the certificate from PEM format to DER format, I decided to convert the file back into PEM format, naming the new reconverted file leaf_cert_restored.pem, and compared it to the original PEM file leaf_cert.pem. When running the diff command, there was no output between the two files, verifying that the conversion back to PEM was successful.
+5. After successfully converting the certificate from PEM format to DER format, I decided to convert the file back into PEM format, naming the new reconverted file leaf_cert_restored.pem, and compared it to the original PEM file leaf_cert.pem. When running the diff command, there was no output between the two files, verifying that the conversion back to PEM was successful.
 
-6.Next i will be working with certifcate format PFX. PFX format consists a bundle of the certificate and private key. I generated my own private key, used it to create a new certifcate and sign it. Then bundled the private key and certificate together to create a PFX file with my own password.
+6. Next i will be working with certifcate format PFX. PFX format consists a bundle of the certificate and private key. I generated my own private key, used it to create a new certifcate and sign it. Then bundled the private key and certificate together to create a PFX file with my own password.
 
 7. Lastly, I verified the PFX file was valid by opening the file and entering my password. Inside the file, it revealed that both the certificate and the private key are encrypted within the file.
 
