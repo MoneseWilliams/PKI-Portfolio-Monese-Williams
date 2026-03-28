@@ -33,7 +33,7 @@ n this lab, I will be understanding one of the most common issues PKI engineers 
   
 - When I verified the PFX file, It showed that the file contains both the certificate and the private key, and that they are encrypted and protected using a password.
 
-![Description of your screenshot](../../../assets/screenshots/your-filename.png)
+![Description of your screenshot](../../../assets/screenshots/week-04/leaf_cert.png)
 
 ## Key Findings
 
