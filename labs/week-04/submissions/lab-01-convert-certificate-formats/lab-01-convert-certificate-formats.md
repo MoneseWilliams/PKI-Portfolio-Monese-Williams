@@ -37,12 +37,19 @@ n this lab, I will be understanding one of the most common issues PKI engineers 
 
 ## Key Findings
 
+- Through this lab, I learned that certificate formats such as PEM, DER, and PFX all contain the same certificate data, but differ in how that data is encoded. PEM files are Base64-encoded and readable, while DER files are binary and not human-readable. PFX files bundle both the certificate and private key together and are protected with a password.
+
+
 ## Explanation
-- Why does a PFX require a password?
-- In what real-world scenario would you choose PEM vs DER vs PFX?
-- Why is it important never to commit private key files to GitHub?
+-  A PFX file requires a password because it contains a private key that must remain protected from unauthorized access.
+  
+- In real-world scenarios, the certificate format depends on the system being used. Linux web servers expect PEM format, which is readable text. Windows machines expect PFX (PKCS#12), which bundles the certificate and private key together. Java applications expect DER format, which is a binary format. Each system requires a specific format, and if the wrong format is used, the certificate will be rejected even if it is valid.
+  
+- It is important to never commit private key files to GitHub because a private key is meant to stay secret. If it is exposed, anyone can use it to impersonate you, access secure systems, or decrypt sensitive data.
 
 ## Challenges / Troubleshooting
+
+-One challenge I faced during this lab was navigating file paths and directories in the terminal. At times, commands failed because the directory I was trying to access did not exist or I was not in the correct location. I resolved this by using commands like pwd and ls to confirm my current directory and ensure the correct file paths were being used. Another challenge was understanding why certain files, like DER and PFX, appeared unreadable when opened with commands like cat or nano. I learned that these formats are binary and not meant to be read directly, and instead require tools like OpenSSL to properly view their contents.
 
 ## Artifacts
 - leaf_cert.pem, leaf_cert.der, leaf_cert_restored.pem, test_cert.pem, test_bundle.pfx
