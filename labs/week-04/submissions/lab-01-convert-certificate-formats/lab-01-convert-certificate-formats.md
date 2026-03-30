@@ -72,3 +72,10 @@ Leaf certificate PFX Format
 
 ## Artifacts
 - leaf_cert.pem, leaf_cert.der, leaf_cert_restored.pem, test_cert.pem, test_bundle.pfx
+
+--
+
+#Stretch 
+
+Due to me being done with my lab, I wanted to try another step by extracting only the certificate from my PFX bundle. After extracting it, I was able to see that the extracted certificate matches the original PEM file. In a PKI environment, you would generally only extract the certificate from a PFX file without the private key because the private key must be kept secret, and there is no need to share it. The certificate is what is needed without compromising your system.
+An enterprise scenario where I would receive a PFX and need to extract just the certificate is when a certificate has been provided by a root CA, but the format is incorrect for the operating system.
