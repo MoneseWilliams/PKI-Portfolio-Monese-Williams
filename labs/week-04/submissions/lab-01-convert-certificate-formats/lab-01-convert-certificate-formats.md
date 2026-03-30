@@ -33,9 +33,21 @@ n this lab, I will be understanding one of the most common issues PKI engineers 
   
 - When I verified the PFX file, It showed that the file contains both the certificate and the private key, and that they are encrypted and protected using a password.
 
-Leaf Certificate
+Leaf Certificate PEM Format
+
 <img width="503" height="1081" alt="leaf_cert" src="https://github.com/user-attachments/assets/d4a0bbbf-f592-4562-9f47-ed18d9c63cfe" />
 
+Leaf Certificate DER Format
+
+<img width="814" height="982" alt="Leaf_cert-Der format" src="https://github.com/user-attachments/assets/5bd1c114-7b9d-49a2-bc50-a679d2b36768" />
+
+Leaf Certificate Restored PEM Format 
+
+<img width="743" height="1093" alt="leaf_cert_restored" src="https://github.com/user-attachments/assets/cded6d9b-404f-4505-bc81-7a3d15569f3d" />
+
+Leaf certificate PFX Format 
+
+<img width="613" height="161" alt="test_bundle_pfx" src="https://github.com/user-attachments/assets/aa656010-77d0-4673-a522-73df2ca69e15" />
 
 ## Key Findings
 
