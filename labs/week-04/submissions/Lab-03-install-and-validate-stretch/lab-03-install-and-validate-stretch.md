@@ -26,7 +26,19 @@ Briefly describe what this lab was about in your own words. What PKI concept or 
 - What did the verify output return after signing — before and after cleanup?
 - What confirmed the trust chain was established?
 
-![Description of your screenshot](../../../assets/screenshots/your-filename.png)
+Test Root Ca
+
+<img width="463" height="317" alt="test root ca cert" src="https://github.com/user-attachments/assets/0246f4ce-7866-493f-9daf-93a33d9754e9" />
+
+Test Signed Certificate 
+
+<img width="494" height="303" alt="test signed cert" src="https://github.com/user-attachments/assets/6043b5fd-4db8-4fd9-8a94-b0e81584905a" />
+
+Test Signed CSR 
+
+<img width="508" height="244" alt="test signed csr" src="https://github.com/user-attachments/assets/9798c5fb-1343-4715-8ba0-dac174d3f625" />
+
+
 
 ## Key Findings
 
