@@ -45,7 +45,7 @@ Test Signed CSR
 
 ## Explanation
 
--The test root CA is self-signed because the Subject and Issuer fields both matched. I identified this in the output when I viewed the certificate using OpenSSL, which confirmed that the certificate signed itself.
+- The test root CA is self-signed because the Subject and Issuer fields both matched. I identified this in the output when I viewed the certificate using OpenSSL, which confirmed that the certificate signed itself.
 
 - After installing the root CA, it was added to my macOS trust store, meaning my system would now trust any certificates that are signed by that root CA without showing warnings.
   
