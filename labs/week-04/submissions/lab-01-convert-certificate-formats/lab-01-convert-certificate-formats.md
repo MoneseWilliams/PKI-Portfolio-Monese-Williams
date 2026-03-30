@@ -45,6 +45,11 @@ Leaf Certificate Restored PEM Format
 
 <img width="743" height="1093" alt="leaf_cert_restored" src="https://github.com/user-attachments/assets/cded6d9b-404f-4505-bc81-7a3d15569f3d" />
 
+Test Generated Certificate
+
+<img width="477" height="276" alt="test_cert" src="https://github.com/user-attachments/assets/a7fa8aab-4127-4e30-88d7-c0a1dd6ad041" />
+
+
 Leaf certificate PFX Format 
 
 <img width="613" height="161" alt="test_bundle_pfx" src="https://github.com/user-attachments/assets/aa656010-77d0-4673-a522-73df2ca69e15" />
