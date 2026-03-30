@@ -46,3 +46,15 @@ Luckily, i faced no challenges during this lab
 
 ## Artifacts
 - root_cas.pem (macOS) or equivalent, screenshots stored in assets/screenshots/week-04/
+
+--
+
+## Stretch
+
+What Would Happen when an enterprise pushes an internal root CA to devices using Group Policy or an MDM?
+
+An enterprise would push their own root CA to employee devices using Group Policy or MDM so that internal systems and applications can be trusted automatically. This allows employees to access company websites, VPNs, and services without getting security warnings, since those certificates will chain back to the organization’s root CA.
+
+A security risk exists if an unauthorized root CA is added to a device because that root CA could be used to issue fake certificates. This means an attacker could intercept traffic, perform man-in-the-middle attacks, or make malicious websites appear trusted, which can compromise sensitive data.
+
+To detect if an unexpected root CA has been installed on a machine, I could inspect the trust store using tools like Keychain Access on macOS or certificate management tools on Windows. I would look for unfamiliar or unrecognized certificate authorities and verify them. 
