@@ -1,12 +1,12 @@
 # Lab 03 — Install a Certificate and Validate Trust (Stretch)
 
 ## Overview
-Briefly describe what this lab was about in your own words. What PKI concept or system behavior were you investigating?
+In this lab, I will be generating my own root CA and adding it to my operating system’s trust store to better understand the concept of certificates and trust chains, and how they align in PKI environments when needing to verify a trust chain in order to establish a secure connection.
 
 ## Environment
-- Operating System:
-- Terminal Used:
-- OpenSSL Version (openssl version):
+- Operating System:macOS
+- Terminal Used:Terminal 
+- OpenSSL Version (openssl version): 
 
 ## Steps Performed
 1. First, I created an artifact directory to place my artifacts in during the lab. I then used OpenSSL to generate a private key and a self-signed root CA, and verified that the generated certificate was valid using the OpenSSL x509 command.
