@@ -6,7 +6,7 @@ In this lab, I will be generating my own root CA and adding it to my operating s
 ## Environment
 - Operating System:macOS
 - Terminal Used:Terminal 
-- OpenSSL Version (openssl version): 
+- OpenSSL Version (openssl version): OpenSSL 3.6.0
 
 ## Steps Performed
 1. First, I created an artifact directory to place my artifacts in during the lab. I then used OpenSSL to generate a private key and a self-signed root CA, and verified that the generated certificate was valid using the OpenSSL x509 command.
