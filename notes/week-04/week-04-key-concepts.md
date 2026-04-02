@@ -15,8 +15,9 @@ It also matters when a certificate has been issued by a trusted public root CA b
 ---
 
 ## 3. Technical Breakdown
--
+
 This concept focuses on understanding how different certificate formats, operating systems, and trust stores all work together in PKI. The main components involved include certificate formats such as PEM, DER, and PFX, different operating systems like macOS, Windows, and Linux, as well as trust stores and root certificate authorities. The process works by creating or receiving a certificate and then using it on a system, where the operating system checks the certificate against its trust store to see if it chains back to a trusted root CA. If the chain is valid, the certificate is trusted. If not, the certificate fails. This shows that if any part of the process is incorrect, such as using the wrong format or not having the correct root CA in the trust store, the certificate will not be trusted even if it is valid.
+
 ---
 
 ## 4. Common Misconceptions
@@ -28,8 +29,9 @@ This concept focuses on understanding how different certificate formats, operati
 ---
 
 ## 5. Where This Shows Up
--
+
 This concept shows up in multiple real-world scenarios such as web security, internal enterprise systems, cloud environments, and DevOps workflows. In web security, certificates are used for HTTPS connections and must be trusted by browsers. In internal enterprise systems, organizations use their own root CAs, which must be installed in employee trust stores to avoid security warnings. In cloud environments, certificates are used on Linux servers and must be in the correct format to function properly. In DevOps workflows, certificates are constantly being created, converted, and deployed, so understanding how formats and trust stores work is important to prevent errors and ensure secure communication.
+
 ---
 
 ## Mental Model
