@@ -1,8 +1,8 @@
-# Week X Lesson Notes — [Topic Title]
+# Week 4 Lesson Notes — Certificate Authorities & Trust Models
 
 ## 1. Core Concept
 
-Explain the foundational concept clearly and practically.
+The concept of week 4 is to better understand one of the main PKI issues that most engineers or aritechts seem to miss when it comes to different certificate formats and their eligibile operating systems and understanding trust storea
 
 ---
 
