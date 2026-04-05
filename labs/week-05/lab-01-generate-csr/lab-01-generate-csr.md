@@ -53,3 +53,10 @@ A challengeed I faced during thre lab was interpreting certain OpenSSL outputs. 
 
 ## Artifacts
 - test_csr.pem, test_cert.pem
+
+--
+
+## Stretch
+
+For my stretch lab, I added a Subject Alternative Name (SAN) extension to my generated CSR and re-signed the certificate. In week 3, I saw the SAN in the X.509 extension fields. It is required for modern TLS certificates because the Common Name (CN) alone is not sufficient, and multiple domains can be included under the same certificate.
+The CN typically shows the main domain name, while the SAN includes all domain names associated with the certificate. A certificate can include multiple SAN entries because they are all related to the same domain. In this lab, the SAN entries included DNS:lab01-san.cvi.internal and DNS:www.lab01-san.cvi.internal.
