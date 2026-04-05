@@ -28,19 +28,28 @@ In this lab, I will be understanding the certificate issuance workflow by breaki
   
 
 ## Results
-- What Subject fields did you include in your CSR, and what does each field communicate to a CA?
-- What output did `openssl req -text` show when you inspected your CSR?
-- How did the CSR differ from the signed certificate when you compared them?
-- What did the diff output show when you compared the public key in the CSR vs the signed cert?
+- The subject fields that were included were the Common Name, Organization, Organizational Unit, Country, State, and Locality. Each of these fields communicates the subject’s identity to the CA.
+  
+- The output from openssl req -text when I inspected the CSR showed the subject fields and the public key algorithm, confirming that it is an RSA key, also presented the signature value confiming the csr is signed
+  
+-The CSR and the signed certificate differ because the CSR is just a request sent to the CA, while the signed certificate is the final issued certificate after the CA signs it. However, their public keys remain the same, which is why when I used the diff command, there was no output.
+  
+- The diff output showed nothing when comparing the CSR public key to the signed certificate public key because there was no difference.
 
 ## Key Findings
 
+A key finding i've found is that even though the CSR and the signed certificate are different, they both contain the same public key, which confirms that the certificate was generated from the original private key. This was verified by comparing the public keys and observing that there was no difference.
+
 ## Explanation
-- Why must the private key never leave the requestor's machine — even when submitting a CSR to a CA?
-- What is the difference between a CSR and a signed certificate?
-- In what real-world scenario would self-signing be appropriate vs submitting to a trusted CA?
+- The private key must never leave the requestor’s machine, even when submitting a CSR to a CA, because it is sensitive and must remain secret. If it is exposed, it can compromise the requestor’s identity and cause the issued certificate to no longer be trusted and be revoked.
+  
+- A CSR is a certificate request generated from system’s private key that you submit to a CA to request a signed certificate. A signed certificate is the certificate you receive from the CA that contains your public key and proves the CA verified your identity with its signature.
+  
+- In the real world, self-signing a certificate is not appropriate unless it is in an internal enterprise PKI environment. This is because, for a system to trust a certificate, it must be issued and signed by a trusted root CA so the system can build a trust chain and verify that the certificate is valid. However, in internal environments, certificates can be self-signed because the root CA is created and managed by the organization and is trusted within their systems only.
 
 ## Challenges / Troubleshooting
+
+A challengeed I faced during thre lab was interpreting certain OpenSSL outputs. For example, I initially thought that “Certificate request self-signature ok” meant the certificate was trusted, but I later understood that it only confirmed the CSR and signing process worked, not that the certificate was trusted by a system.
 
 ## Artifacts
 - test_csr.pem, test_cert.pem
