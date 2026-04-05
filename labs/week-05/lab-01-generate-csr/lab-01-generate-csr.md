@@ -32,7 +32,7 @@ In this lab, I will be understanding the certificate issuance workflow by breaki
   
 - The output from openssl req -text when I inspected the CSR showed the subject fields and the public key algorithm, confirming that it is an RSA key, also presented the signature value confiming the csr is signed
   
--The CSR and the signed certificate differ because the CSR is just a request sent to the CA, while the signed certificate is the final issued certificate after the CA signs it. However, their public keys remain the same, which is why when I used the diff command, there was no output.
+- The CSR and the signed certificate differ because the CSR is just a request sent to the CA, while the signed certificate is the final issued certificate after the CA signs it. However, their public keys remain the same, which is why when I used the diff command, there was no output.
   
 - The diff output showed nothing when comparing the CSR public key to the signed certificate public key because there was no difference.
 
