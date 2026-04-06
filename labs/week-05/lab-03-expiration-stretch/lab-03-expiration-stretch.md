@@ -1,7 +1,7 @@
 # Lab 03 — Simulate a Certificate Expiration Scenario (Stretch)
 
 ## Overview
-Briefly describe what this lab was about in your own words. What PKI concept or operational scenario were you investigating?
+In this lab, I will be better understanding the certificate expiration process and why it is one of the main causes of systems breaking within a PKI enterprise environment. This lab will help me gain the skills of a real engineer to implement the workflow of how to detect and renew a certificate after it has expired.
 
 ## Environment
 - Operating System:macOS
@@ -9,8 +9,9 @@ Briefly describe what this lab was about in your own words. What PKI concept or 
 - OpenSSL Version (openssl version): OpenSSL 3.6.0
 
 ## Steps Performed
-Summarize the key steps you performed. Do not copy the lab instructions — describe what you actually did.
-1.
+
+1. First, I created a directory on my system to store all my artifacts for this lab. I then generated my own private key and used it to create a CSR. I issued a certificate using the CSR and gave it a short validity window. I then verified that it was created properly by inspecting the certificate and reviewing the validity period, which showed notBefore=Apr 6 20:49:13 2026 GMT and notAfter=Apr 7 20:49:13 2026 GMT, showing the certificate is only valid for 1 day. If any system attempts to trust this certificate after that time, it will fail validation because the certificate has expired.
+
 2.
 3.
 4.
