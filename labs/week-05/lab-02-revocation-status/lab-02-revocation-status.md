@@ -1,7 +1,7 @@
 # Lab 02 — Check Certificate Revocation Status with OCSP
 
 ## Overview
-In this lab, I will be retrieving a live certificate from a website, inspecting it, and determining whether the certificate has been revoked or not by using the Certificate Revocation List (CRL) and an OCSP responder. This ties heavily into real-world PKI environments due to the importance of checking certificate status.
+In this lab, I will be retrieving a live certificate from a website, inspecting it, and determining whether the certificate has been revoked or not by using the Certificate Revocation List (CRL) and an OCSP responder. This ties heavily into real world PKI environments due to the importance of checking certificate status.
 
 ## Environment
 - Operating System:macOS
