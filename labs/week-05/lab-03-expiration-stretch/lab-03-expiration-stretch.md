@@ -4,9 +4,9 @@
 Briefly describe what this lab was about in your own words. What PKI concept or operational scenario were you investigating?
 
 ## Environment
-- Operating System:
-- Terminal Used:
-- OpenSSL Version (openssl version):
+- Operating System:macOS
+- Terminal Used:Terminal
+- OpenSSL Version (openssl version): OpenSSL 3.6.0
 
 ## Steps Performed
 Summarize the key steps you performed. Do not copy the lab instructions — describe what you actually did.
