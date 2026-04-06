@@ -1,13 +1,13 @@
 # Lab 02 — Check Certificate Revocation Status with OCSP
 
 ## Overview
-Briefly describe what this lab was about in your own words. What PKI concept or system behavior were you investigating?
+In this lab, I will be retrieving a live certificate from a website, inspecting it, and determining whether the certificate has been revoked or not by using the Certificate Revocation List (CRL) and an OCSP responder. This ties heavily into real-world PKI environments due to the importance of checking certificate status.
 
 ## Environment
 - Operating System:macOS
 - Terminal Used:Terminal
 - OpenSSL Version (openssl version):OpenSSL 3.6.0
-- Website Used for Certificate Retrieval: 
+- Website Used for Certificate Retrieval: Twitch.tv
 
 ## Steps Performed
 
@@ -29,19 +29,28 @@ A hard fail, on the other hand, will block access to the certificate if the resp
 An organization might choose to run its own OCSP responder instead of relying on a public CA’s responder because this allows the organization to handle all certificate checks internally without the need for external services. This helps avoid issues if the CA’s responder becomes unavailable.
   
 ## Results
-- What OCSP URL did you find in the certificate's Authority Information Access extension?
-- What was the OCSP response status (`good`, `revoked`, or `unknown`) and what does it mean?
-- What were the `This Update` and `Next Update` values in the OCSP response, and what do they indicate?
-- Where was the CRL Distribution Point located in the certificate?
+- The OCSP URL I found in the certificate's Authority Information Access extension is http://ocsp.globalsign.com/ca/gsatlasr3dvtlsca2025q2
+  
+- The OCSP response status that populated was Good which means the Certificate is valid and has not been revoked
+  
+- In the OCSP response the timestamps This Update: Apr  6 06:00:00 2026 GMT and Next Update: Apr  6 18:00:00 2026 GMT and indicate when the OSCP Responder last updated and when it will be updated again.
+  
+- The CRL Distribution Point was located in the extensions part of the X.509 certificate
 
 ## Key Findings
 
+A key finding i have is the difference between OCSP and CRL. OCSP provides real-time certificate status, while CRLs are published on a schedule and may not always be up to date. I also learned that most systems use a soft fail if the OCSP responder is unavailable, meaning the certificate may still be trusted even if its status cannot be checked.
+
 ## Explanation
-- What is the difference between OCSP and CRL as revocation checking methods?
-- Why does an OCSP query require both the leaf certificate and the issuer certificate?
-- In what scenario would a certificate show `unknown` status from an OCSP responder?
+- The difference between OCSP and CRL as revocation checking methods is that OCSP is a real-time responder that provides up to date status updates on a certificate, whereas a CRL is a list of certificate serial numbers that have been revoked and is only updated on a schedule. This can cause a delay or lag in revocation status updates when using a CRL.
+  
+- An OCSP query requires both the leaf certificate and the issuer certificate because it needs to identify which CA issued the certificate in order to properly validate its status.
+  
+- A certificate wuld only show unknown status from an OCSP responder if The OCSP responder does not have status information for this certificate
 
 ## Challenges / Troubleshooting
+
+I also had some difficulty understanding why both the leaf certificate and issuer certificate were required for the OCSP query. After working through the lab, I realized that the issuer certificate is necessary to identify which CA issued the certificate so the responder can properly check its status.
 
 ## Artifacts
 - leaf_cert.pem, issuer_cert.pem, ocsp_response.txt
