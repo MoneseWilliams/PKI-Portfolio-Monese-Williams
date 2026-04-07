@@ -14,10 +14,14 @@ In this lab, I will be better understanding the certificate expiration process a
 
 2. Next, I used the OpenSSL x509 -checkend command to check whether a certificate will expire within a specified amount of time, which is very useful in a real PKI environment. I first checked using 1 hour and received the output “certificate will not expire,” but when I checked again for 1 day, it returned “certificate will expire.” I would typically use this command in a monitoring script to alert on certificates expiring within 30 days by checking the certificate’s expiration window in advance to provide a heads-up.
 
-3. Next, i created another certifacte using OpenSSL with a valditity period that hs already passed since in real PKI enviorments this is something i will be dealinng with and what to expect. 
-4.
-5.
+3. Next, I created another certificate using OpenSSL with a validity period that has already passed, making it an expired certificate. This simulates a real world PKI scenario where certificates can expire and cause systems to fail if not renewed in time. This helped me understand what to expect when working with expired certificates and how to identify them. When I verified the expired certificate using OpenSSL, it returned an error "verification failed", indicating that the certificate has expired. This directly relates to what a browser or server would display to an end user, such as a warning that the connection is not secure or that the certificate is no longer valid.
+
+4. Lastly, since the certificate is expired, the proper step is to replace it with a new certificate and a new private key for security purposes. I generated a new private key and created a new CSR, then used the new CSR to issue a new certificate. I verified that the new certificate was valid and observed an output stating “certificate will not expire,” along with the validity period showing notBefore=Apr 7 12:59:35 2026 GMT and notAfter=Apr 7 12:59:35 2027 GMT.
+
+5. 
 6.
+7.
+8.
 
 ## Results
 - What output did `openssl x509 -checkend` produce for the short-lived certificate?
