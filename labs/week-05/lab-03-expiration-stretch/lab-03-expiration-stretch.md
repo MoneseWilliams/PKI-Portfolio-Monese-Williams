@@ -18,10 +18,11 @@ In this lab, I will be better understanding the certificate expiration process a
 
 4. Lastly, since the certificate is expired, the proper step is to replace it with a new certificate and a new private key for security purposes. I generated a new private key and created a new CSR, then used the new CSR to issue a new certificate. I verified that the new certificate was valid and observed an output stating “certificate will not expire,” along with the validity period showing notBefore=Apr 7 12:59:35 2026 GMT and notAfter=Apr 7 12:59:35 2027 GMT.
 
-5. 
-6.
-7.
-8.
+## Expired vs Replacement
+
+When comparing test_cert_expired.pem and test_cert_replacement.pem, I was able to see that the validity period for the expired certificate was notBefore=Jan 1 00:00:00 2023 GMT and notAfter=Jan 2 00:00:00 2023 GMT, meaning the certificate had already expired. meanwhile, the replacement certificate showed a validity period of notBefore=Apr 7 12:59:35 2026 GMT and notAfter=Apr 7 12:59:35 2027 GMT, meaning it is valid for one year.
+This confirms the replacement workflow, where I generated a new private key, created a new CSR, and issued a new certificate. The main change is the updated validity period and the use of a new private key, which ensures the certificate is secure and usable within the system for a longer period of time.
+
 
 ## Results
 - What output did `openssl x509 -checkend` produce for the short-lived certificate?
