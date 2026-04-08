@@ -10,11 +10,9 @@
 
 ## Diagnostic Steps
 
-Summarize what you checked at each step. Do not copy the lab instructions — describe what you actually did.
+**Step 1 — Retrieve: There are four steps in the PKI diagnostic framework that must be followed in order. Due to patients seeing security warnings when accessing the appointment portal, a diagnostic is needed. The first step is to obtain the live certificate from portal.metrogeneral.org. When retrieving the certificate using the OpenSSL s_client command, the certificate was successfully returned and saved with no errors were shown during the connection.
 
-**Step 1 — Retrieve:**
-
-**Step 2 — Parse:**
+**Step 2 — Parse: After retreiving the live cert with no erros using openssl, i was then able to proceed to the next step of the diagonostic which is parse and reading the certifocate fields SAN, Issuer, and the Valdity dates using Openssl x509 -text -noout command. I was able to determine the  Issuer: C=GB, ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO RSA Domain Validation Secure Server CA, Validity: Not Before: Apr  9 00:00:00 2015 GMT Not After : Apr 12 23:59:59 2015 GMT ( certificte expired Apr 13 2015) and X509v3 Subject Alternative Name: DNS:*.badssl.com, DNS:badssl.com 
 
 **Step 3 — Validate the Chain:**
 
