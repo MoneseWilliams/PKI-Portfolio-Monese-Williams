@@ -1,51 +1,140 @@
-# Lab 02 — Diagnose a Broken Certificate Chain
+# Lab [##] — [Lab Title]
+
+**Week 6 · PKI Incident Diagnosis & Troubleshooting**
+**CVI PKI Career Pathway — Phase 1 Foundations**
+
+---
 
 ## Incident Summary
 
-**Target System:** Radiology imaging platform (simulated via incomplete-chain.badssl.com)
+**Target system:** [system name and/or simulation target]
+**Diagnosed by:** [your name]
+**Date of diagnosis:** [date]
 
-**Reported Behavior:** TLS failure after certificate renewal — vendor says certificate looks fine, connection still failing
+---
 
-**Diagnostic Scope:** PKI Diagnostic Framework — all 4 steps
+### What failed
+
+[One sentence: what exactly caused the TLS failure]
+
+---
+
+### Evidence
+
+- [Key field or value from the certificate — e.g., Not After date, Issuer CN, SAN entries]
+- [Supporting command output or observation]
+- [Any additional evidence]
+
+---
+
+### Why it failed
+
+[2–3 sentences: the technical explanation of the failure. Connect it to what you learned in the
+relevant Week 5 or Week 6 lesson. Don't just describe what happened — explain why it caused a
+TLS error.]
+
+---
+
+### Chain status
+
+[Was the certificate chain structurally intact? Were there any chain-related issues separate from
+the primary failure?]
+
+---
+
+### Remediation path
+
+[Step-by-step: what needs to happen to restore the failing system? Be specific. Walk through
+the process rather than summarizing it in one line.]
+
+---
+
+### Prevention
+
+[One concrete thing the organization could do differently to prevent this failure type from
+recurring]
+
+---
 
 ## Diagnostic Steps
 
-Summarize what you checked at each step. Do not copy the lab instructions — describe what you actually did.
+Document each step of the PKI Diagnostic Framework as you worked through it.
 
-**Step 1 — Retrieve:**
+### Step 1 — Retrieve
 
-**Step 2 — Parse:**
+**Command used:**
 
-**Step 3 — Validate the Chain:**
+```
+[paste command here]
+```
 
-**Step 4 — Check Revocation and Trust:**
+**What you observed:**
 
-## Evidence
+[What the output told you — connection errors, certificate retrieved, etc.]
 
-- Leaf certificate Subject:
-- Issuer CN (the missing intermediate):
-- Number of certificates the server sent:
-- Verify return code from openssl s_client:
-- openssl verify error before adding intermediate:
-- openssl verify result after adding intermediate with -untrusted:
-- Is the root CA trusted by your system? (yes/no):
+---
 
-## Root Cause
+### Step 2 — Parse
 
-Is this a certificate problem or a server configuration problem? Explain the distinction clearly — this matters for how the fix is communicated to the team.
+**Command used:**
 
-## Remediation
+```
+[paste command here]
+```
 
-Step-by-step path to resolve this incident:
+**Key fields from the certificate:**
 
-1.
-2.
-3.
+| Field | Value |
+|---|---|
+| Subject CN | |
+| Issuer | |
+| Not Before | |
+| Not After | |
+| SAN entries | |
 
-## Key Findings
+**What you found:**
 
-## Challenges / Troubleshooting
+[What the parsed certificate told you about the failure]
 
-## Artifacts
+---
 
-- leaf_cert.pem, issuer_cert.pem
+### Step 3 — Validate the Chain
+
+**Command used:**
+
+```
+[paste command here]
+```
+
+**Result:**
+
+[Chain valid / chain broken — and what the error said]
+
+**What you found:**
+
+[What this step confirmed or ruled out]
+
+---
+
+### Step 4 — Check Revocation and Trust
+
+**Command used:**
+
+```
+[paste command here]
+```
+
+**What you found:**
+
+[OCSP URL present or absent, revocation status if checked, any trust store issues]
+
+---
+
+## Reflection
+
+[2–3 sentences: What did this lab reinforce or clarify for you? Was there a step where
+you had to slow down and think carefully?]
+
+---
+
+*CVI PKI Career Pathway — Foundations Phase*
