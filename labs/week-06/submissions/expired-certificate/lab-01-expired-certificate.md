@@ -23,7 +23,7 @@ The certifacte that was issued to the system had expired causing an unsecured TL
 
 - [Key field or value from the certificate — e.g., Not After date, Issuer CN, SAN entries] When looking at the X.509 fields of the certificate, i was able to see the valdityy period of Not Before date: Apr  9 00:00:00 2015 GMT Not After date: Apr 12 23:59:59 2015 GMT confirming this certificate has expired April 12, 2015
 
-- [Supporting command output or observation] Using the command 'openssl x509' i was able to parse and read the certificate fully. I observed the Subject, SAN, Issuer and Valditity fields during my diagnotic observation and was able to confirm that the Subject Alternative Name (SAN) DNS:*.badssl.com, DNS:badssl.com does match the Subject confirming their are no hostname mismatch. The issuer field also confirmed the certficate was issued by a public CA 
+- [Supporting command output or observation] Using the command 'openssl x509' i was able to parse and read the certificate fully. I observed the Subject, SAN, Issuer and Valditity fields during my diagnotic observation and was able to confirm that the Subject Alternative Name (SAN) DNS:*.badssl.com, DNS:badssl.com does match the Subject confirming their are no hostname mismatch. The issuer field also confirmed the certficate was issued by a public CA, however when looking at the valdity field i determined
 - [Any additional evidence]
 
 ---
