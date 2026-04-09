@@ -103,11 +103,11 @@ openssl s_client -connect expired.badssl.com:443 -showcerts </dev/null 2>/dev/nu
 
 **Result:**
 
-[Chain valid / chain broken — and what the error said] 
+Looking at the certificate chain, I was able to see that the leaf certificate for *.badssl.com was issued by the intermediate CA, COMODO RSA Domain Validation Secure Server CA. This intermediate CA was then issued a certificate by another CA, COMODO RSA Certification Authority. The last certificate in the chain was issued by AddTrust External CA Root, which is the root CA of the chain. This validates that the chain isn’t broken and has no errors, as each issued certificate leads up to a trusted CA and is not the reason behind the failed TLS connection.
 
 **What you found:**
 
-[What this step confirmed or ruled out] Looking at the certificate chain, I was able to see that the leaf certificate for *.badssl.com was issued by the intermediate CA, COMODO RSA Domain Validation Secure Server CA. This intermediate CA was then issued a certificate by another CA, COMODO RSA Certification Authority. The last certificate in the chain was issued by AddTrust External CA Root, which is the root CA of the chain. This verifies that the chain is not broken and that each certificate is properly issued by the next authority
+While validating the chain, I was able to verify that the chain is intact, with each certificate properly issued by the next authority all the way up to a trusted root CA.
 
 
 ---
