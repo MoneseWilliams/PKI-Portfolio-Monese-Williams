@@ -41,15 +41,14 @@ the primary failure?] The certificate trust chain is valid with no related issue
 
 ### Remediation path
 
-[Step-by-step: what needs to happen to restore the failing system? Be specific. Walk through
-the process rather than summarizing it in one line.] A new csr needs to be created wtih a valid validity date to submit to the public ca. this will then allow the ca to sign and issue a new certificate
+In order to fix this issue, first a new CSR needs to be created and submitted to the public CA. This will then allow the CA to sign and issue a new certificate with an updated validity period to the system. We then deploy the certificate to restore trust with the system and establish a secure TLS connection.
 
 ---
 
 ### Prevention
 
 [One concrete thing the organization could do differently to prevent this failure type from
-recurring]
+recurring] i recommend this organization create a certificate life managemnt (CLM) invertory list of all their certficates and implemment an automated renweal aleart for the certifiactes using the 90 60 30 day rule to prevent missing the renewal deadline risking the certifcates expiring, 90 days you
 
 ---
 
