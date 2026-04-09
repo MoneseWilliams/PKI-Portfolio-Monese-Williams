@@ -34,8 +34,7 @@ The certifacte that was issued to the system had expired causing an unsecured TL
 
 ### Chain status
 
-[Was the certificate chain structurally intact? Were there any chain-related issues separate from
-the primary failure?] The certificate trust chain is valid with no related issues to the primary failure. Verifying the expired certifcate a the cause of the TLS failure. I validated the certificate chain and saw that the leaf certificate *.badssl.com was issued by the intermediate CA, COMODO RSA Domain Validation Secure Server CA. This intermediate CA was then issued a certificate by COMODO RSA Certification Authority, and the root CA was AddTrust External CA Root. This verifies that the chain is not broken and that each certificate is properly issued by the next authority.
+The certificate trust chain is valid with no related issues to the primary failure. Verifying the expired certifcate a the cause of the TLS failure. I validated the certificate chain and saw that the leaf certificate *.badssl.com was issued by the intermediate CA, COMODO RSA Domain Validation Secure Server CA. This intermediate CA was then issued a certificate by COMODO RSA Certification Authority, and the root CA was AddTrust External CA Root. This verifies that the chain is not broken and that each certificate is properly issued by the next authority.
 
 ---
 
@@ -47,8 +46,7 @@ In order to fix this issue, first a new CSR needs to be created and submitted to
 
 ### Prevention
 
-[One concrete thing the organization could do differently to prevent this failure type from
-recurring] i recommend this organization create a certificate life managemnt (CLM) invertory list of all their certficates and implemment an automated renweal aleart for the certifiactes using the 90 60 30 day rule to prevent missing the renewal deadline risking the certifcates expiring, 90 days you
+I recommend this organization create a Certificate Lifecycle Management (CLM) inventory list of all their certificates and implement automated renewal alerts using the 90, 60, 30 day rule to prevent missing renewal deadlines and risking certificates expiring. A 90 day alert should be set before the certificate expires, followed by a 60 day reminder to begin the renewal process, and lastly a 30 day reminder to complete the renewal process and monitor the deployment of the certificate.
 
 ---
 
