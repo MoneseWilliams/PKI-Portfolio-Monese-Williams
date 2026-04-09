@@ -1,40 +1,143 @@
-# Lab 01 — Diagnose an Expired Certificate
+# Lab 1 — Expired Certificate
+
+**Week 6 · PKI Incident Diagnosis & Troubleshooting**
+**CVI PKI Career Pathway — Phase 1 Foundations**
+
+---
 
 ## Incident Summary
 
-**Target System:** portal.metrogeneral.org (simulated via expired.badssl.com)
+**Target system:** portal.metrogeneral.org (simulated via expired.badssl.com)
+**Diagnosed by:** Monese Williams
+**Date of diagnosis:** 4/8/2026
 
-**Reported Behavior:** TLS failure — patients seeing security warnings when accessing the appointment portal
+---
 
-**Diagnostic Scope:** PKI Diagnostic Framework — all 4 steps
+### What failed
+
+[One sentence: what exactly caused the TLS failure]
+
+---
+
+### Evidence
+
+- [Key field or value from the certificate — e.g., Not After date, Issuer CN, SAN entries]
+- [Supporting command output or observation]
+- [Any additional evidence]
+
+---
+
+### Why it failed
+
+[2–3 sentences: the technical explanation of the failure. Connect it to what you learned in the
+relevant Week 5 or Week 6 lesson. Don't just describe what happened — explain why it caused a
+TLS error.]
+
+---
+
+### Chain status
+
+[Was the certificate chain structurally intact? Were there any chain-related issues separate from
+the primary failure?]
+
+---
+
+### Remediation path
+
+[Step-by-step: what needs to happen to restore the failing system? Be specific. Walk through
+the process rather than summarizing it in one line.]
+
+---
+
+### Prevention
+
+[One concrete thing the organization could do differently to prevent this failure type from
+recurring]
+
+---
 
 ## Diagnostic Steps
 
-**Step 1 — Retrieve: There are four steps in the PKI diagnostic framework that must be followed in order. Due to patients seeing security warnings when accessing the appointment portal, a diagnostic is needed. The first step is to obtain the live certificate from portal.metrogeneral.org. When retrieving the certificate using the OpenSSL s_client command, the certificate was successfully returned and saved with no errors were shown during the connection.
+Document each step of the PKI Diagnostic Framework as you worked through it.
 
-**Step 2 — Parse: After retriveing the live certifiacte with no erros using OpenSSL, i was able to proceed to the next step of the diagnostic, which is parsing and reading the certificate fields such as SAN,Issuer, Subject, and the vvalidity date using the openssl c509 -text -noout command
+### Step 1 — Retrieve
 
-I was able to detrmine the following:
-- Issuer: CN=COMODO RSA Domain Validation Secure Server CA
-- Validity: Not Before: Apr 9 00:00:00 2015 GMT, Not After: Apr 12 23:59:59 2015 GMT (certificate expired April 12, 2015)
-- Subject Alternative Name (SAN): DNS:*.badssl.com, DNS:badssl.com
-- Subject: CN=*.badssl.com
+**Command used:**
 
-These certificate fields confirm that the certifiacte was issued by a public CA. The Subject and SAN fields hostname match, meanthing thier are no SAN mismatcch. However the certificate is expired, which normally would cause browsers to display a security warning.
+```
+[paste command here]
+```
 
-**Step 3 — Validate the Chain: Even though a cause to the issue may have been identified in step 2, it is still important to complete the full diagnostic framework. This brings me to step 3, which is validating the certificate chain and confirming that the full chain from the leaf to the root is intact using OpenSSL.
+**What you observed:**
 
-Looking at the certificate chain, I was able to see that the leaf certificate for *.badssl.com was issued by the intermediate CA, COMODO RSA Domain Validation Secure Server CA. This intermediate CA was then issued a certificate by another CA, COMODO RSA Certification Authority. The last certificate in the chain was issued by AddTrust External CA Root, which is the root CA of the chain. This verifies that the chain is not broken and that each certificate is properly issued by the next authority
+[What the output told you — connection errors, certificate retrieved, etc.]
 
-**Step 4 — Check Revocation and Trust: 
+---
 
-## Evidence
+### Step 2 — Parse
 
-- Not Before date: Apr  9 00:00:00 2015 GMT
-- Not After date: Apr 12 23:59:59 2015 GMT
-- Days since expiration: 4018
-- Subject (entity the certificate was issued to):
-- Issuer:COMODO RSA Domain Validation Secure Server CA
+**Command used:**
+
+```
+[paste command here]
+```
+
+**Key fields from the certificate:**
+
+| Field | Value |
+|---|---|
+| Subject CN | |
+| Issuer | |
+| Not Before | |
+| Not After | |
+| SAN entries | |
+
+**What you found:**
+
+[What the parsed certificate told you about the failure]
+
+---
+
+### Step 3 — Validate the Chain
+
+**Command used:**
+
+```
+[paste command here]
+```
+
+**Result:**
+
+[Chain valid / chain broken — and what the error said]
+
+**What you found:**
+
+[What this step confirmed or ruled out]
+
+---
+
+### Step 4 — Check Revocation and Trust
+
+**Command used:**
+
+```
+[paste command here]
+```
+
+**What you found:**
+
+[OCSP URL present or absent, revocation status if checked, any trust store issues]
+
+---
+
+## Reflection
+
+[2–3 sentences: What did this lab reinforce or clarify for you? Was there a step where
+you had to slow down and think carefully?]
+
+---
+
+*CVI PKI Career Pathway — Foundations Phase*- Issuer:COMODO RSA Domain Validation Secure Server CA
 - Chain status (complete / incomplete): complete
 - OCSP URL present? (yes/no): Yes 
 
