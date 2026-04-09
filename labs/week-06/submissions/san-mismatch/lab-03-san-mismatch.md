@@ -1,55 +1,140 @@
-# Lab 03 — Diagnose a Hostname and SAN Mismatch
+# Lab [##] — [Lab Title]
+
+**Week 6 · PKI Incident Diagnosis & Troubleshooting**
+**CVI PKI Career Pathway — Phase 1 Foundations**
+
+---
 
 ## Incident Summary
 
-**Target System:** Staff scheduling portal (simulated via wrong.host.badssl.com)
+**Target system:** [system name and/or simulation target]
+**Diagnosed by:** [your name]
+**Date of diagnosis:** [date]
 
-**Reported Behavior:** Browser security errors after the portal was moved to a new hostname — staff cannot access the scheduling system
+---
 
-**Diagnostic Scope:** PKI Diagnostic Framework — all 4 steps
+### What failed
+
+[One sentence: what exactly caused the TLS failure]
+
+---
+
+### Evidence
+
+- [Key field or value from the certificate — e.g., Not After date, Issuer CN, SAN entries]
+- [Supporting command output or observation]
+- [Any additional evidence]
+
+---
+
+### Why it failed
+
+[2–3 sentences: the technical explanation of the failure. Connect it to what you learned in the
+relevant Week 5 or Week 6 lesson. Don't just describe what happened — explain why it caused a
+TLS error.]
+
+---
+
+### Chain status
+
+[Was the certificate chain structurally intact? Were there any chain-related issues separate from
+the primary failure?]
+
+---
+
+### Remediation path
+
+[Step-by-step: what needs to happen to restore the failing system? Be specific. Walk through
+the process rather than summarizing it in one line.]
+
+---
+
+### Prevention
+
+[One concrete thing the organization could do differently to prevent this failure type from
+recurring]
+
+---
 
 ## Diagnostic Steps
 
-Summarize what you checked at each step. Do not copy the lab instructions — describe what you actually did.
+Document each step of the PKI Diagnostic Framework as you worked through it.
 
-**Step 1 — Retrieve:**
+### Step 1 — Retrieve
 
-**Step 2 — Parse:**
+**Command used:**
 
-**Step 3 — Validate the Chain:**
+```
+[paste command here]
+```
 
-**Step 4 — Check Revocation and Trust:**
+**What you observed:**
 
-## Evidence
+[What the output told you — connection errors, certificate retrieved, etc.]
 
-- Hostname accessed (what the client expected):
-- Subject CN (what the certificate says):
-- SAN DNS entries (list all):
-- Do any SAN entries match the hostname? (yes/no):
-- Verify return code from openssl s_client:
-- Does the chain validate independently of the hostname issue? (yes/no):
-- OCSP URL present? (yes/no):
+---
 
-## Root Cause
+### Step 2 — Parse
 
-Is this a certificate problem, a chain problem, or a configuration/deployment problem? Explain why the distinction matters.
+**Command used:**
 
-## Remediation
+```
+[paste command here]
+```
 
-Step-by-step path to resolve this incident:
+**Key fields from the certificate:**
 
-1.
-2.
-3.
+| Field | Value |
+|---|---|
+| Subject CN | |
+| Issuer | |
+| Not Before | |
+| Not After | |
+| SAN entries | |
 
-### Why a DNS CNAME alias would not fix this
+**What you found:**
 
-Explain clearly — in terms a non-technical manager could follow — why adding a CNAME from `staff.metrogeneral.org` back to `scheduling.metrogeneral.org` does not resolve the TLS error.
+[What the parsed certificate told you about the failure]
 
-## Key Findings
+---
 
-## Challenges / Troubleshooting
+### Step 3 — Validate the Chain
 
-## Artifacts
+**Command used:**
 
-- No certificate files required for this lab
+```
+[paste command here]
+```
+
+**Result:**
+
+[Chain valid / chain broken — and what the error said]
+
+**What you found:**
+
+[What this step confirmed or ruled out]
+
+---
+
+### Step 4 — Check Revocation and Trust
+
+**Command used:**
+
+```
+[paste command here]
+```
+
+**What you found:**
+
+[OCSP URL present or absent, revocation status if checked, any trust store issues]
+
+---
+
+## Reflection
+
+[2–3 sentences: What did this lab reinforce or clarify for you? Was there a step where
+you had to slow down and think carefully?]
+
+---
+
+*CVI PKI Career Pathway — Foundations Phase*
