@@ -42,7 +42,7 @@ the primary failure?] The certificate trust chain is valid with no related issue
 ### Remediation path
 
 [Step-by-step: what needs to happen to restore the failing system? Be specific. Walk through
-the process rather than summarizing it in one line.] A new private key needs to be generated and used to create a csr to submit to the public ca. this will issue anew
+the process rather than summarizing it in one line.] A new csr needs to be created wtih a valid validity date to submit to the public ca. this will then allow the ca to sign and issue a new certificate
 
 ---
 
