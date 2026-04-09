@@ -81,15 +81,15 @@ openssl x509 -in expired_cert.pem -text -noout
 
 | Field | Value |
 |---|---|
-| Subject CN | |
-| Issuer | |
-| Not Before | |
-| Not After | |
-| SAN entries | |
+| Subject CN |*.badssl.com|
+| Issuer |COMODO RSA Domain Validation Secure Server CA|
+| Not Before |Apr  9 00:00:00 2015 GMT|
+| Not After |Apr 12 23:59:59 2015 GMT|
+| SAN entries |DNS:*.badssl.com, DNS:badssl.com|
 
 **What you found:**
 
-[What the parsed certificate told you about the failure]
+After parsing the certificate and reading the X.509 certificate fields, it confirmed that the certificate was issued by a public CA. The Subject and SAN fields match the hostname, meaning there are no SAN mismatches. However, the certificate is expired, which would normally cause browsers to display a security warning, confirming the TLS failure was caused due to the certificate being expired.
 
 ---
 
@@ -103,11 +103,12 @@ openssl s_client -connect expired.badssl.com:443 -showcerts </dev/null 2>/dev/nu
 
 **Result:**
 
-[Chain valid / chain broken — and what the error said]
+[Chain valid / chain broken — and what the error said] 
 
 **What you found:**
 
-[What this step confirmed or ruled out]
+[What this step confirmed or ruled out] Looking at the certificate chain, I was able to see that the leaf certificate for *.badssl.com was issued by the intermediate CA, COMODO RSA Domain Validation Secure Server CA. This intermediate CA was then issued a certificate by another CA, COMODO RSA Certification Authority. The last certificate in the chain was issued by AddTrust External CA Root, which is the root CA of the chain. This verifies that the chain is not broken and that each certificate is properly issued by the next authority
+
 
 ---
 
