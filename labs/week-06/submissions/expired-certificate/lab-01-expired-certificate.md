@@ -56,15 +56,16 @@ Document each step of the PKI Diagnostic Framework as you worked through it.
 
 ### Step 1 — Retrieve
 
-**Command used:**
+**Command used:** 
 
 ```
-[paste command here]
+openssl s_client -connect expired.badssl.com:443 -showcerts </dev/null 2>/dev/null \
+  | openssl x509 -outform PEM > expired_cert.pem
 ```
 
 **What you observed:**
 
-[What the output told you — connection errors, certificate retrieved, etc.]
+When retrieving the live certificate using the OpenSSL s_client command, the certificate was successfully returned and saved, with no errors shown during the connection.
 
 ---
 
@@ -73,7 +74,7 @@ Document each step of the PKI Diagnostic Framework as you worked through it.
 **Command used:**
 
 ```
-[paste command here]
+openssl x509 -in expired_cert.pem -text -noout
 ```
 
 **Key fields from the certificate:**
@@ -97,7 +98,7 @@ Document each step of the PKI Diagnostic Framework as you worked through it.
 **Command used:**
 
 ```
-[paste command here]
+openssl s_client -connect expired.badssl.com:443 -showcerts </dev/null 2>/dev/null
 ```
 
 **Result:**
@@ -115,7 +116,7 @@ Document each step of the PKI Diagnostic Framework as you worked through it.
 **Command used:**
 
 ```
-[paste command here]
+openssl x509 -in expired_cert.pem -noout -text | grep -A1 "OCSP"
 ```
 
 **What you found:**
