@@ -25,29 +25,24 @@ The certifacte that was issued to the system had expired causing an unsecured TL
 
 -  Using the command 'openssl x509' I was able to parse and read the certificate fully. I observed the Subject, SAN, Issuer and Validity fields during my diagnostic observation and was able to confirm that the Subject Alternative Name (SAN) DNS:*.badssl.com, DNS:badssl.com does match the Subject confirming their is no hostname mismatch. The issuer field also confirmed the certificate was issued by a public CA (COMODO RSA Domain Validation Secure Server CA), however when looking at the validity field I determined the certificate was expired as of April 12, 2015
   
-- [Any additional evidence]
-
 ---
 
 ### Why it failed
 
-[2–3 sentences: the technical explanation of the failure. Connect it to what you learned in the
-relevant Week 5 or Week 6 lesson. Don't just describe what happened — explain why it caused a
-TLS error.] - The TLS faliure occurred due to an expired certificate that was not renewed on time, This is a common error that happens when the TLS handshake fails due to a ecetrfice  causing a unsucurd TLS conection 
- 
+- The TLS failure occurred due to an expired certificate that was not renewed on time. This caused the TLS handshake to fail because the certificate was no longer trusted by the system.
 ---
 
 ### Chain status
 
 [Was the certificate chain structurally intact? Were there any chain-related issues separate from
-the primary failure?]
+the primary failure?] The certificate trust chain is valid with no related issues to the primary failure. Verifying the expired certifcate a the cause of the TLS failure. I validated the certificate chain and saw that the leaf certificate *.badssl.com was issued by the intermediate CA, COMODO RSA Domain Validation Secure Server CA. This intermediate CA was then issued a certificate by COMODO RSA Certification Authority, and the root CA was AddTrust External CA Root. This verifies that the chain is not broken and that each certificate is properly issued by the next authority.
 
 ---
 
 ### Remediation path
 
 [Step-by-step: what needs to happen to restore the failing system? Be specific. Walk through
-the process rather than summarizing it in one line.]
+the process rather than summarizing it in one line.] A new private key needs to be generated and used to create a csr to submit to the public ca. this will
 
 ---
 
