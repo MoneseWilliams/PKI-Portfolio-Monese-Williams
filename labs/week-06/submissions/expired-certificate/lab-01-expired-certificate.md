@@ -146,7 +146,7 @@ Step-by-step path to resolve this incident:
 
 1. First, a new CSR would need to be created and submitted to the public CA.
 2. Next, the CA will sign and issue the new certificate to the organization’s system with an updated validity period.
-3. Lastly, upon receiving the replacement certificate, it will then need to be deployed and used to reestablish the TLS secure connection again within the TLS handshake. After a successful deployment, the connection should be secure and patients should no longer receive warnings when accessing their patient portals.
+3. Lastly, upon receiving the replacement certificate, it will then need to be deployed and used to reestablish the TLS secure connection again within the TLS handshake. After a successful deployment, the chain needs to be verified using OpenSSL. The connection should then be secured, and patients should no longer receive warnings when accessing their patient portals.
 
 ## Key Findings
 
