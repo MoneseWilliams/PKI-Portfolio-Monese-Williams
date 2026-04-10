@@ -122,14 +122,13 @@ openssl x509 -in expired_cert.pem -noout -text | grep -A1 "OCSP"
 
 **What you found:**
 
-[OCSP URL present or absent, revocation status if checked, any trust store issues]
+When checking the revocation and trust of the certificate, I was able to confirm that the OCSP URL is present. I attempted to check the revocation status using OCSP, but received a “Responder Error: unauthorized (6),” indicating that the responder rejected the request and not showing a valid status of the certificate.
 
 ---
 
 ## Reflection
 
-[2–3 sentences: What did this lab reinforce or clarify for you? Was there a step where
-you had to slow down and think carefully?]
+This lab reinforced a lot for me, not only is it helping me explain what I’m doing in technical terms better, but being able to break down the reason for the TLS failure to explaining the steps of remediation is key. A step where I really had to slow down at was step 4, revocation and trust. Querying the OCSP responder took some time since I had to create a directory to store my artifacts in for the leaf cert and the issuer cert, then query the responder, but I forgot to make the OCSP URL a variable so the txt file was empty, but once that was fixed I received the Responder Error: unauthorized (6), which isn’t an error I did something wrong but more of an error of the responder rejecting the request, but it did cause me to think carefully as well.
 
 ---
 
@@ -139,19 +138,24 @@ you had to slow down and think carefully?]
 
 ## Root Cause
 
-What caused the TLS failure? Be specific — is this a certificate problem, a chain problem, or a configuration problem?
+The TLS failure was caused due to a certificate problem. The issued certificate used during the TLS handshake to secure the system’s connection expired, which caused the system to lose trust.
 
 ## Remediation
 
 Step-by-step path to resolve this incident:
 
-1.
-2.
-3.
+1. First, a new CSR would need to be created and submitted to the public CA.
+2. Next, the CA will sign and issue the new certificate to the organization’s system with an updated validity period.
+3. Lastly, upon receiving the replacement certificate, it will then need to be deployed and used to reestablish the TLS secure connection again within the TLS handshake. After a successful deployment, the connection should be secure and patients should no longer receive warnings when accessing their patient portals.
 
 ## Key Findings
 
+As I navigated through this lab, some key findings I observed is that the certificate is the leaf cert of the chain and expired on April 12, 2015, which was the entire reason behind the TLS failure. The certificate did populate both the CRL and OCSP URL, which both can be used to check the revocation status of the certificate. The certificate chain was also ruled out as not the cause of the failure, but the root CA is not in my system’s trust store, and after some research I determined the root CA, AddTrust External CA Root, is obsolete and no longer used. However, this is also a simulation, so I still wouldn’t count that as being the cause of the TLS failure, but it could be why the OCSP responder rejected my request for revocation status of the certificate.
+
+
 ## Challenges / Troubleshooting
+
+One challenge I faced during this lab was making my artifacts directory. For some reason, instead of moving the file expired_cert.pem, I instead created expired-cert.pem and moved it into my week 6 submissions. So when I did the cat command to view the expired cert, it was just an empty file, and I ended up being stuck in the file and wasn’t sure how to get out of it, but then ended up using Control + C and it took me back to my home directory. I also had an issue with my paths and learned that using ~/labs and /labs mean two different things. If I use ~/labs, it’s because I’m in my home directory trying to get to that path, but with just /labs, it’s used for if I’m already in the path.
 
 ## Artifacts
 
