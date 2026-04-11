@@ -1,4 +1,4 @@
-# Lab [##] — [Lab Title]
+# Lab 2 — Broken Chain
 
 **Week 6 · PKI Incident Diagnosis & Troubleshooting**
 **CVI PKI Career Pathway — Phase 1 Foundations**
