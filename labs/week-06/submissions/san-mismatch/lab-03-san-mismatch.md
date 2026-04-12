@@ -25,7 +25,7 @@ The TLS failure was caused by a hostname mismatch.
 
 - After parsing the certificate and inspecting the X.509 certificate, I can confirm the certificate was issued by a public CA named R13. It also does not expire until June 22, 2026, meaning it is still valid. But, when checking the subject name "*.badssl.com" and the SAN field "DNS:*.badssl.com, DNS:badssl.com," I can confirm they both do match; however, with the organization changing their server name to "staff.metrogeneral.org" and it not being included in the SAN field, this could confirm why their server keeps receiving a TLS failure with a warning when attempting to access the site.
   
-- [Any additional evidence]
+- [Any additional evidence
 
 ---
 
@@ -37,15 +37,14 @@ The TLS failed due to a hostname mismatch. Since the organization changed the ho
 
 ### Chain status
 
-[Was the certificate chain structurally intact? Were there any chain-related issues separate from
-the primary failure?] When i first retrived the live certiface and seen the "Verify return code: 0 (ok)" this first confirmed that the certofcae was validated succuesfuly as well as the trsut chain bu of course you never want to assume but alwayes verify so when checking the certs trust chain manually 
+When I first retrieved the live certificate and saw the "Verify return code: 0 (ok)," this first confirmed that the certificate was validated successfully as well as the trust chain. To further verify manually, I used the intermediate CA and the -untrusted flag and received an output, "mismatch_cert.pem: OK," verifying the SAN hostname mismatch is the primary failure of the TLS connection.
 
 ---
 
 ### Remediation path
 
 [Step-by-step: what needs to happen to restore the failing system? Be specific. Walk through
-the process rather than summarizing it in one line.]
+the process rather than summarizing it in one line.] 
 
 ---
 
@@ -73,7 +72,7 @@ openssl s_client -connect wrong.host.badssl.com:443 -servername wrong.host.badss
 
 **What you observed:**
 
-[What the output told you — connection errors, certificate retrieved, etc.]
+When I retrieved the live certificate from the server, I observed the output "Verify return code: 0 (ok)," which already tells me the certificate is validated with no errors within this first check.
 
 ---
 
@@ -99,7 +98,7 @@ openssl x509 -in mismatch_cert.pem -noout -text | grep -A5 "Subject Alternative 
 
 **What you found:**
 
-[What the parsed certificate told you about the failure]
+When parsing this certificate, I was able to observe that the certificate is still valid due to not expiring until June 22, 2026, as well as the issuer being a public CA named R13. However, the subject and SAN fields do match, but with the change of the hostname and it not being a part of the SAN field, this does confirm the reasoning for the TLS failure.
 
 ---
 
@@ -109,6 +108,8 @@ openssl x509 -in mismatch_cert.pem -noout -text | grep -A5 "Subject Alternative 
 
 ```
 openssl verify mismatch_cert.pem
+
+ openssl verify -untrusted issuertwo_cert.pem mismatch_cert.pem
 ```
 
 **Result:**
