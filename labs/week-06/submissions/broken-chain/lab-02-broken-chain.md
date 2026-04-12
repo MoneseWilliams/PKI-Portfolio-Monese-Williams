@@ -7,21 +7,21 @@
 
 ## Incident Summary
 
-**Target system:** [system name and/or simulation target]
-**Diagnosed by:** [your name]
-**Date of diagnosis:** [date]
+**Target system:** incomplete-chain.badssl.com
+**Diagnosed by:** Monese Williams
+**Date of diagnosis:** 4/12/2026
 
 ---
 
 ### What failed
 
-[One sentence: what exactly caused the TLS failure]
+[One sentence: what exactly caused the TLS failure] The TLS connection failed due to a server misconfiguration with a missing intermediate ca within the certificate trust chain.
 
 ---
 
 ### Evidence
 
-- [Key field or value from the certificate — e.g., Not After date, Issuer CN, SAN entries]
+- [Key field or value from the certificate — e.g., Not After date, Issuer CN, SAN entries] 
 - [Supporting command output or observation]
 - [Any additional evidence]
 
@@ -65,7 +65,7 @@ Document each step of the PKI Diagnostic Framework as you worked through it.
 **Command used:**
 
 ```
-[paste command here]
+openssl s_client -connect incomplete-chain.badssl.com:443 </dev/null 2>&1
 ```
 
 **What you observed:**
@@ -79,18 +79,18 @@ Document each step of the PKI Diagnostic Framework as you worked through it.
 **Command used:**
 
 ```
-[paste command here]
+openssl x509 -in leaf_cert.pem -text -noout
 ```
 
 **Key fields from the certificate:**
 
 | Field | Value |
 |---|---|
-| Subject CN | |
-| Issuer | |
-| Not Before | |
-| Not After | |
-| SAN entries | |
+| Subject CN |*.badssl.com|
+| Issuer |CN=R13|
+| Not Before |Mar 24 20:02:52 2026 GMT|
+| Not After |Jun 22 20:02:51 2026 GMT|
+| SAN entries |DNS:*.badssl.com, DNS:badssl.com|
 
 **What you found:**
 
@@ -103,7 +103,7 @@ Document each step of the PKI Diagnostic Framework as you worked through it.
 **Command used:**
 
 ```
-[paste command here]
+openssl verify leaf_cert.pem
 ```
 
 **Result:**
@@ -121,7 +121,8 @@ Document each step of the PKI Diagnostic Framework as you worked through it.
 **Command used:**
 
 ```
-[paste command here]
+openssl s_client -connect incomplete-chain.badssl.com:443 -showcerts </dev/null 2>/dev/null \
+  | grep "Verify return code"
 ```
 
 **What you found:**
