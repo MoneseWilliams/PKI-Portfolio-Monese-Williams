@@ -21,24 +21,24 @@ The TLS failure was caused by a hostname mismatch.
 
 ### Evidence
 
-- When retreinve the live certifcate there was no hostname mismatch error, but there is a verify return code saying " Verify return code: 0 (ok)" meaning their is no certificate validation errors. 
-- [Supporting command output or observation]
+- When retrieving the live certificate, there was no hostname mismatch error, but there is a verify return code saying "Verify return code: 0 (ok)," meaning there are no certificate validation errors.
+
+- After parsing the certificate and inspecting the X.509 certificate, I can confirm the certificate was issued by a public CA named R13. It also does not expire until June 22, 2026, meaning it is still valid. But, when checking the subject name "*.badssl.com" and the SAN field "DNS:*.badssl.com, DNS:badssl.com," I can confirm they both do match; however, with the organization changing their server name to "staff.metrogeneral.org" and it not being included in the SAN field, this could confirm why their server keeps receiving a TLS failure with a warning when attempting to access the site.
+  
 - [Any additional evidence]
 
 ---
 
 ### Why it failed
 
-[2–3 sentences: the technical explanation of the failure. Connect it to what you learned in the
-relevant Week 5 or Week 6 lesson. Don't just describe what happened — explain why it caused a
-TLS error.]
+The TLS failed due to a hostname mismatch. Since the organization changed the hostname to "staff.metrogeneral.org" but didn’t get a new certificate issued with the change included in the SAN DNS field, the server connection automatically failed due to the TLS handshake not being able to verify the subject’s name because it was not included.
 
 ---
 
 ### Chain status
 
 [Was the certificate chain structurally intact? Were there any chain-related issues separate from
-the primary failure?]
+the primary failure?] the certficate chain is structally intact because
 
 ---
 
@@ -65,7 +65,10 @@ Document each step of the PKI Diagnostic Framework as you worked through it.
 **Command used:**
 
 ```
-[paste command here]
+openssl s_client -connect wrong.host.badssl.com:443 -servername wrong.host.badssl.com \
+  </dev/null 2>/dev/null | openssl x509 -outform PEM > mismatch_cert.pem
+
+openssl s_client -connect wrong.host.badssl.com:443 -servername wrong.host.badssl.com </dev/null 2>&1
 ```
 
 **What you observed:**
@@ -79,7 +82,9 @@ Document each step of the PKI Diagnostic Framework as you worked through it.
 **Command used:**
 
 ```
-[paste command here]
+openssl x509 -in mismatch_cert.pem -text -noout
+
+openssl x509 -in mismatch_cert.pem -noout -text | grep -A5 "Subject Alternative Name"
 ```
 
 **Key fields from the certificate:**
@@ -103,7 +108,7 @@ Document each step of the PKI Diagnostic Framework as you worked through it.
 **Command used:**
 
 ```
-[paste command here]
+openssl verify mismatch_cert.pem
 ```
 
 **Result:**
@@ -121,7 +126,7 @@ Document each step of the PKI Diagnostic Framework as you worked through it.
 **Command used:**
 
 ```
-[paste command here]
+openssl x509 -in mismatch_cert.pem -noout -text | grep -A2 "OCSP"
 ```
 
 **What you found:**
