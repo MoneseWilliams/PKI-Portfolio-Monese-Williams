@@ -94,7 +94,7 @@ openssl x509 -in leaf_cert.pem -text -noout
 
 **What you found:**
 
-[What the parsed certificate told you about the failure]
+[What the parsed certificate told you about the failure] The parsed certificate has told me 
 
 ---
 
