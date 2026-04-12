@@ -38,7 +38,7 @@ The TLS failed due to a hostname mismatch. Since the organization changed the ho
 ### Chain status
 
 [Was the certificate chain structurally intact? Were there any chain-related issues separate from
-the primary failure?] the certficate chain is structally intact because
+the primary failure?] When i first retrived the live certiface and seen the "Verify return code: 0 (ok)" this first confirmed that the certofcae was validated succuesfuly as well as the trsut chain bu of course you never want to assume but alwayes verify so when checking the certs trust chain manually 
 
 ---
 
