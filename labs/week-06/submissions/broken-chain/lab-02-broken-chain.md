@@ -15,7 +15,7 @@
 
 ### What failed
 
-[One sentence: what exactly caused the TLS failure] The TLS connection failed due to a server misconfiguration with a missing intermediate ca within the certificate trust chain.
+The TLS connection failed due to a server misconfiguration with a missing intermediate ca within the certificate trust chain.
 
 ---
 
@@ -32,6 +32,7 @@
 ### Why it failed
 
 The TLS connection failed because the certificate was renewed without the intermediate CA, causing a server misconfiguration. In order for TLS to establish a secure connection, the certificate trust chain must be fully intact. Since it was broken, the server was unable to verify the leaf certificate up to the root because the intermediate that issued the certificate to the leaf certificate was missing.
+
 ---
 
 ### Chain status
