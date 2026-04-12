@@ -91,11 +91,11 @@ openssl x509 -in mismatch_cert.pem -noout -text | grep -A5 "Subject Alternative 
 
 | Field | Value |
 |---|---|
-| Subject CN | |
-| Issuer | |
-| Not Before | |
-| Not After | |
-| SAN entries | |
+| Subject CN |CN=*.badssl.com|
+| Issuer |CN=R13|
+| Not Before | Mar 24 20:02:52 2026 GMT|
+| Not After |Jun 22 20:02:51 2026 GMT|
+| SAN entries |DNS:*.badssl.com, DNS:badssl.com|
 
 **What you found:**
 
