@@ -15,13 +15,13 @@
 
 ### What failed
 
-[One sentence: what exactly caused the TLS failure]
+The TLS failure was caused by a hostname mismatch.
 
 ---
 
 ### Evidence
 
-- [Key field or value from the certificate — e.g., Not After date, Issuer CN, SAN entries]
+- When retreinve the live certifcate there was no hostname mismatch error, but there is a verify return code saying " Verify return code: 0 (ok)" meaning their is no certificate validation errors. 
 - [Supporting command output or observation]
 - [Any additional evidence]
 
