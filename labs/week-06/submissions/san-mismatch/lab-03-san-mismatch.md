@@ -1,4 +1,4 @@
-# Lab [##] — [Lab Title]
+# Lab 3 — San Mismatch
 
 **Week 6 · PKI Incident Diagnosis & Troubleshooting**
 **CVI PKI Career Pathway — Phase 1 Foundations**
@@ -7,9 +7,9 @@
 
 ## Incident Summary
 
-**Target system:** [system name and/or simulation target]
-**Diagnosed by:** [your name]
-**Date of diagnosis:** [date]
+**Target system:** wrong.host.badssl.com
+**Diagnosed by:** Monese Williams
+**Date of diagnosis:** 4/12/2026
 
 ---
 
