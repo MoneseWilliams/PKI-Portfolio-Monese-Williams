@@ -114,11 +114,11 @@ openssl verify mismatch_cert.pem
 
 **Result:**
 
-[Chain valid / chain broken — and what the error said]
+When validating the trust chain, I first received an error, "unable to get local issuer certificate" and "verification failed," because the leaf certificate was being validated without the intermediate CA being provided. I then downloaded the intermediate CA from the leaf cert and used the -untrusted flag to validate the trust chain manually, and after doing so I received an output, "mismatch_cert.pem: OK," verifying that the trust chain is structurally intact.
 
 **What you found:**
 
-[What this step confirmed or ruled out]
+This step helped rule out any broken chain issues that could have contributed to the cause of the TLS failure. Since there were no issues, this confirmed that the SAN mismatch is still the root cause of the TLS failure.
 
 ---
 
@@ -132,14 +132,13 @@ openssl x509 -in mismatch_cert.pem -noout -text | grep -A2 "OCSP"
 
 **What you found:**
 
-[OCSP URL present or absent, revocation status if checked, any trust store issues]
+When checking revocation and trust of this cert using the above command, there was no output or OCSP URL present, so no direct OCSP revocation status could be verified from the certificate itself. Revocation is also not relevant to this failure because there was no indication that the certificate was revoked, which also confirms the TLS failure is caused by the SAN hostname mismatch rather than any revocation issues.
 
 ---
 
 ## Reflection
 
-[2–3 sentences: What did this lab reinforce or clarify for you? Was there a step where
-you had to slow down and think carefully?]
+This lab reinforced for me how important the SAN field is during the TLS handshake and how a certificate can still be fully valid but fail if the requested hostname is not included within the SAN. It also helped clarify the difference between certificate validity/trust chain issues with a missing cert and attempting to validate 
 
 ---
 
