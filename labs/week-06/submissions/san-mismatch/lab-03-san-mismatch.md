@@ -25,7 +25,7 @@ The TLS failure was caused by a hostname mismatch.
 
 - After parsing the certificate and inspecting the X.509 certificate, I can confirm the certificate was issued by a public CA named R13. It also does not expire until June 22, 2026, meaning it is still valid. But, when checking the subject name "*.badssl.com" and the SAN field "DNS:*.badssl.com, DNS:badssl.com," I can confirm they both do match; however, with the organization changing their server name to "staff.metrogeneral.org" and it not being included in the SAN field, this could confirm why their server keeps receiving a TLS failure with a warning when attempting to access the site.
   
-- [Any additional evidence
+  
 
 ---
 
