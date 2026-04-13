@@ -49,8 +49,7 @@ A remediation path to restore the TLS failure would be to first request a new ce
 
 ### Prevention
 
-[One concrete thing the organization could do differently to prevent this failure type from
-recurring]
+I recommend the organization implement a certificate management name change control procedure requiring a certificate to be reviewed anytime there is a hostname change within the server. Before deploying the hostname changes, SAN should also be verified for the new hostname and make sure it is included; if not, then a new cert will need to be requested. This would help prevent future TLS failures caused by SAN hostname mismatches.
 
 ---
 
