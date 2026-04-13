@@ -43,8 +43,7 @@ When I first retrieved the live certificate and saw the "Verify return code: 0 (
 
 ### Remediation path
 
-[Step-by-step: what needs to happen to restore the failing system? Be specific. Walk through
-the process rather than summarizing it in one line.] 
+A remediation path to restore the TLS failure would be to first request a new certificate to be reissued with the new hostname that was changed to staff.metrogeneral.org. After that, the new cert will need to be installed, then checked to see if the SAN field has the new hostname inside. After verifying successfully, deploy the new certificate within the server to fix the TLS failure.
 
 ---
 
