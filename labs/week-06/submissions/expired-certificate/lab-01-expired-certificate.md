@@ -132,10 +132,6 @@ This lab reinforced a lot for me, not only is it helping me explain what I’m d
 
 ---
 
-*CVI PKI Career Pathway — Foundations Phase*- Issuer:COMODO RSA Domain Validation Secure Server CA
-- Chain status (complete / incomplete): complete
-- OCSP URL present? (yes/no): Yes 
-
 ## Root Cause
 
 The TLS failure was caused due to a certificate problem. The issued certificate used during the TLS handshake to secure the system’s connection expired, which caused the system to lose trust.
