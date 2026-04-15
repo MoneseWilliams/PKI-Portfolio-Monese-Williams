@@ -93,6 +93,7 @@ Now, I would proceed with validating the certificate chain by using the command 
 Lastly, I would check revocation and trust of the certificate. Revocation checks would show whether the previously replaced certificate has been revoked by the issuing CA using CRL or OCSP status. Based on the scenario, since the certificate was fully replaced with a new certificate and new private key, there is an operational obligation to revoke the old certificate if it remains valid in order to prevent unauthorized use and reduce security risk.
 
 The revocation status of the old certificate would not be relevant to the current incident because the outage is affecting the new certificate that has been deployed on the clinical subnet, not the old certificate. Overall, this step reinforces revocation as a secondary security concern rather than the cause of the current incident, because the revocation status of the old certificate would not impact the TLS failure occurring with the new certificate on the clinical subnet.
+
 ---
 
 ### Failures in Diagnostic Order
