@@ -10,7 +10,7 @@
 **System:** ehr.metrogeneral.org
 **Reported:** Friday at 4:47 PM
 **Author:** Monese Williams
-**Status:** [Diagnosis complete — pending remediation / Resolved]
+**Status:** Pending remediation 
 
 ---
 
@@ -22,42 +22,42 @@ Metro General’s electronic health records are showing security errors, inhibit
 
 ### Technical Findings
 
-#### Finding 1 — [Descriptive title, e.g., "Missing Root CA in Clinical Subnet Trust Stores"]
+#### Finding 1 — Certificate Is Within Validity Period
 
-**Type:** [Certificate / Chain / Trust Store / Revocation / Configuration]
-**Severity:** [Critical / High / Medium / Low]
+**Type:** Certificate
+**Severity:** Low
 
 **Detail:**
-[What you found and why it matters technically]
+Inspection of the live certificate validity period field during my diagnostic indicates that the certificate is currently within its active validity window and has not expired. This rules out certificate expiration as the cause of the TLS failure.
 
 **Evidence:**
-[Commands run or scenario information that confirms this finding]
+The scenario states that the certificate was replaced last week and issued with a one-year validity window, indicating that the certificate should still be valid at the time of the incident.
 
 ---
 
-#### Finding 2 — [Descriptive title]
+#### Finding 2 — Server Presents Same Certificate Chain to Both Subnets
 
-**Type:** [Certificate / Chain / Trust Store / Revocation / Configuration]
-**Severity:** [Critical / High / Medium / Low]
+**Type:** Chain
+**Severity:** [Critical / High / Medium / Low] Low
 
 **Detail:**
-[What you found and why it matters technically]
+Based on the diagnostic process and scenario details, I determined that the server presents the same certificate and certificate chain to both the working and failing subnets. This indicates the certificate chain itself is fully intact and is not the direct cause of the TLS failure.
 
 **Evidence:**
-[Commands run or scenario information that confirms this finding]
+This finding is supported by chain validation and the scenario statement that both subnets receive the same certificate and certificate chain from the server. Because the main office subnet successfully establishes a TLS connection using the same presented chain, this rules out a broken or incomplete certificate chain as the source of the issue.
 
 ---
 
-#### Finding 3 — [Descriptive title, if applicable]
+#### Finding 3 — Missing Root CA in Clinical Subnet Trust Stores
 
-**Type:** [Certificate / Chain / Trust Store / Revocation / Configuration]
-**Severity:** [Critical / High / Medium / Low]
+**Type:** Trust Store
+**Severity:** Critical
 
 **Detail:**
-[What you found and why it matters technically]
+After running the full PKI diagnostic framework and reviewing the given scenario, I determined that the internal Root CA was likely never pushed via Group Policy to the new clinical subnet that was added two weeks ago, because the original GPO push occurred six months earlier. This matters because the organization uses an internal CA, which must be trusted by client systems through manual distribution methods such as GPO. Without the internal Root CA present in the trust store, affected systems will fail TLS validation and receive certificate trust errors.
 
 **Evidence:**
-[Commands run or scenario information that confirms this finding]
+Scenario evidence supporting this finding includes the fact that the organization uses an internal CA rather than a public CA, meaning the internal Root CA must be distributed to company systems to establish trust. The scenario states the internal Root CA was pushed via GPO six months ago, while the failing clinical subnet was added only two weeks ago. This strongly suggests that devices connected to the clinical subnet may be missing the internal Root CA in their trust store.
 
 ---
 
@@ -100,24 +100,19 @@ The revocation status of the old certificate would not be relevant to the curren
 
 List each failure or contributing factor in the order a PKI engineer should address them:
 
-1. **[Primary failure]**
-   - Type: [Certificate / Chain / Trust Store / Revocation / Configuration]
-   - Evidence: [what in the scenario supports this]
+1. **Missing Root Ca In Trust Store**
+   - Type: Trust Store
+   - Evidence: Based on the scenario, the internal Root CA was distributed to all devices via GPO six months ago; however, the clinical subnet was added to the network two weeks ago after the GPO push, suggesting this subnet missed the push to add the internal CA to its devices’ trust store.
 
-2. **[Contributing factor or secondary issue]**
-   - Type:
-   - Evidence:
-
-3. **[Additional issue, if applicable]**
-   - Type:
-   - Evidence:
+2. **Missed GPO Internal CA Push**
+   - Type: Trust Store
+   - Evidence: The new clinical subnet was added two weeks ago, while the last GPO push occurred six months ago, strongly suggesting the organization did not perform an additional CA trust distribution to the newly added subnet, resulting in devices missing the internal Root CA.
 
 ---
 
 ### Root Cause
 
-[One paragraph: what is the underlying reason the incident occurred? Go beyond the technical
-failure — explain the process or operational gap that allowed it to happen.]
+The underlying reason the incident occurred is because there was no imperative check to make sure that a GPO push for the internal CA was implemented for the new clinical subnet. This suggests the company has no checklist in place to validate and confirm that all subnets have received a GPO push for the internal CA after a new subnet is issued.
 
 ---
 
@@ -125,31 +120,27 @@ failure — explain the process or operational gap that allowed it to happen.]
 
 List each action in the order it should be executed:
 
-1. [Immediate — what restores access right now]
-2. [Short-term — what fully resolves the incident within 24–48 hours]
-3. [Secondary — cleanup, revocation, or follow-up actions]
+1. [Immediate — what restores access right now] An immediate GPO push of the internal Root CA to the clinical subnet so it can be added to the devices’ OS trust stores.
+2. [Short-term — what fully resolves the incident within 24–48 hours] Validate that all subnets within the organization’s environment have received the GPO push for the internal Root CA and confirm the Root CA is actually present in systems’ trust stores.
+3. [Secondary — cleanup, revocation, or follow-up actions] Ensure the previous certificate has been revoked to prevent unnecessary security risk if the old private key were ever compromised, and implement a system and/or process that requires automatic internal Root CA trust deployment whenever a new subnet is added.
 
 ---
 
 ### Prevention Recommendations
 
-[2–3 concrete recommendations to prevent recurrence. Think about: certificate deployment
-verification, Group Policy or MDM scope, post-renewal validation checklists, monitoring.]
+I recommend this organization implement a required validation checklist anytime a new subnet is added to make sure the internal Root CA is pushed and added to all systems’ trust stores before the subnet is fully added to the network for users. I also recommend implementing a system within GPO that automatically pushes the internal CA to newly added subnets so it does not have to be done manually.
 
 ---
 
 ### Lessons Learned
 
-[One paragraph written as if debriefing your team. What did this incident reveal about the
-organization's PKI operations? What should change going forward?]
+This incident revealed that the organization’s PKI operations lacked a structured process to ensure the deployment of the internal Root CA is implemented when a new subnet is added. Even though the internal CA was distributed six months ago with no issues via GPO, this new clinical subnet being added confirms that a strategy for ensuring all subnets receive the push or otherwise have the Root CA in their systems’ trust stores needs to be put in place.
 
 ---
 
 ## Reflection
 
-[2–3 sentences: Which part of the multi-failure investigation was hardest to reason through?
-Was there a point where you wanted to skip a framework step? What would you do differently
-in a real production incident?]
+The hardest part of the multi-failure investigation for me was not figuring out the issue itself, but explaining my reasoning in a technical way. Based on the scenario, I was able to work through the logic and determine what was happening, but putting that reasoning into proper technical wording for each framework step was the most difficult part for me. In a real production incident, I would continue improving my documentation skills so I can communicate technical findings as clearly as I can reason through them
 
 ---
 
