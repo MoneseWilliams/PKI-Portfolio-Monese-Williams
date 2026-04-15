@@ -7,17 +7,16 @@
 
 ## PKI Incident Report
 
-**System:** [system name]
-**Reported:** [date and time of incident]
-**Author:** [your name]
+**System:** ehr.metrogeneral.org
+**Reported:** Friday at 4:47 PM
+**Author:** Monese Williams
 **Status:** [Diagnosis complete — pending remediation / Resolved]
 
 ---
 
 ### Executive Summary
 
-[2–3 sentences: what failed, who was affected, and what needs to happen to fix it.
-Write this so a non-technical manager can understand it without PKI background.]
+Metro General’s electronic health records are showing security errors, inhibiting staff from accessing patient records from the new clinical subnet. We need to perform a full diagnostic to determine the root cause of this error so it can be properly fixed.
 
 ---
 
@@ -68,30 +67,32 @@ Document how you worked through the 4-step framework for this scenario.
 
 #### Step 1 — Retrieve
 
-[What you would do to retrieve the certificate from the failing system.
-What command would you use? What output would you expect?]
+First, the live certificate from the internal server ehr.metrogeneral.org needs to be retrieved using the command openssl s_client -connect ehr.metrogeneral.org:443 -showcerts. I would expect to receive output of the live certificate and the full trust chain within the TLS handshake so I can inspect the certificate. Since the server is accessible from one subnet but failing from another, my diagnostic approach would be to use the working subnet (10.10.0.0/24) as a baseline and compare it to the failing subnet (10.22.0.0/24) to identify what differences are causing the failure.
+
+Based on the scenario, there is a reason to think the certificate was not successfully deployed because it was working fine before the replacement was implemented, and the replacement involved a new private key being generated as well.
 
 ---
 
 #### Step 2 — Parse
 
-[What fields you would check and what the scenario tells you about each.
-What does the certificate confirm or rule out?]
+Next, I would parse the certificate and inspect the Subject Key Identifier (SKI) to confirm whether a new key was used, since a new private key was generated during the replacement of the original certificate. I would also check the Issuer field to confirm the certificate was issued by Metro General Internal CA - G2, as stated in the scenario.
+
+The information given in the scenario does not suggest a validity date problem, since the certificate was replaced last week with a one year validity period. However, I would still check the validity field to confirm that the dates are accurate. Overall, inspection of the certificate should rule out expired certificate issues.
 
 ---
 
 #### Step 3 — Validate the Chain
 
-[What chain validation would show. What is the likely result and why?
-What does this step confirm about where the failure is located?]
+Now, I would proceed with validating the certificate chain by using the command openssl verify -CAfile root.pem -untrusted intermediate.pem cert.pem. The chain validation should show that the chain is fully intact, ruling out broken chain issues since the certificate and the chain are the same in both subnets. This suggests the trust store is the source of the TLS failure on the clinical subnet because the GPO for the internal CA was pushed six months ago, but the clinical subnet was added two weeks ago. The state of the trust store on devices in the clinical subnet would mean that the internal root CA is missing from the trust store on those devices.
+
 
 ---
 
 #### Step 4 — Check Revocation and Trust
 
-[What revocation check would show. Is there a revocation obligation from the scenario?
-What does this step confirm or surface as a secondary concern?]
+Lastly, I would check revocation and trust of the certificate. Revocation checks would show whether the previously replaced certificate has been revoked by the issuing CA using CRL or OCSP status. Based on the scenario, since the certificate was fully replaced with a new certificate and new private key, there is an operational obligation to revoke the old certificate if it remains valid in order to prevent unauthorized use and reduce security risk.
 
+The revocation status of the old certificate would not be relevant to the current incident because the outage is affecting the new certificate that has been deployed on the clinical subnet, not the old certificate. Overall, this step reinforces revocation as a secondary security concern rather than the cause of the current incident, because the revocation status of the old certificate would not impact the TLS failure occurring with the new certificate on the clinical subnet.
 ---
 
 ### Failures in Diagnostic Order
