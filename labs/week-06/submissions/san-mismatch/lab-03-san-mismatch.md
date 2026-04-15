@@ -45,6 +45,10 @@ When I first retrieved the live certificate and saw the "Verify return code: 0 (
 
 A remediation path to restore the TLS failure would be to first request a new certificate to be reissued with the new hostname that was changed to staff.metrogeneral.org. After that, the new cert will need to be installed, then checked to see if the SAN field has the new hostname inside. After verifying successfully, deploy the new certificate within the server to fix the TLS failure.
 
+### DNS CNAME FIX WHY OR WHY NOT?
+
+A DNS CNAME would not fix this issue because changing where the hostname points in DNS does not change the hostname the browser validates against the certificate. The browser still checks the certificate against the hostname the user originally entered, and if that hostname is not listed in the SAN field, the TLS warning will remain. The only proper fix is issuing a new certificate containing the correct hostname.
+
 ---
 
 ### Prevention
