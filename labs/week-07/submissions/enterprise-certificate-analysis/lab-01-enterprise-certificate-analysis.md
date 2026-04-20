@@ -1,20 +1,17 @@
 # Lab — Enterprise Certificate Analysis
 
 ## Overview
-Briefly describe the purpose of this lab in your own words. In this lab i will be retrieiving a kuve certtiface from a well known enterprise organization and performing a complete certifucae analysis on the tls certfifacte full deployment. 
-What PKI concept or system behavior were you investigating?
+In this lab, I will be retrieving a live certificate from a well-known enterprise organization and performing a complete certificate analysis on the TLS certificate and its full deployment. I will be investigating where TLS terminates within the enviroment and documenting my findings.
 
 ---
 
 ## Steps Performed
-Summarize the key steps you performed to complete the lab.
 
-Do **not copy the lab instructions**.
-Describe what you actually did.
+1. First, I will be retrieving the live certificate from my target enterprise, Capital One Bank, using openssl s_client. I then viewed the live certificate to confirm it populated successfully and decided to pull up the full certificate chain for Capital One Bank. The full certificate TLS handshake completed succuessfully and populated three certificate blocks.
 
-1.
-2.
+2. Next, i paresd the live certoficate 
 3.
+4.
 
 ---
 
