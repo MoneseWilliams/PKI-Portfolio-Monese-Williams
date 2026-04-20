@@ -1,7 +1,7 @@
-# Lab — [Lab Title]
+# Lab — Enterprise Certificate Analysis
 
 ## Overview
-Briefly describe the purpose of this lab in your own words.
+Briefly describe the purpose of this lab in your own words. In this lab i will be retrieiving a kuve certtiface from a well known enterprise organization and performing a complete certifucae analysis on the tls certfifacte full deployment. 
 What PKI concept or system behavior were you investigating?
 
 ---
