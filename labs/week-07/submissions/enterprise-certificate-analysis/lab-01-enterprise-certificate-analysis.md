@@ -25,6 +25,8 @@ In this lab, I will be retrieving a live certificate from a well-known enterpris
 
 Issuer, validity window, certificate type (DV/OV/EV), SAN count, wildcard usage.
 
+For this enterprise live certifacte the issuer is CN=DigiCert EV RSA CA G2, which is a known public CA with a validty window of Not Before: Jan 9 00:00:00 2026 GMT and Not After: Jan 8 23:59:59 2027 GMT, with approximately 364 days remaining before expiration, so not only did the TLS handshake compelte succusfully but the cert is also still active. The certoficate type would be OV (Organization Validation) due to the organization details it includes in the subject field O=Capital One Financial Corporation. within the SAN field, only one entry populated DNS:capitalone.com with no wildcards meaning this certfictae is only issued to this domain
+
 ---
 
 ## Chain Analysis:
