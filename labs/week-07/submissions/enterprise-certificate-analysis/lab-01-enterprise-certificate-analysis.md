@@ -21,27 +21,39 @@ In this lab, I will be retrieving a live certificate from a well-known enterpris
 
 ---
 
-Certificate Summary: Issuer, validity window, certificate type (DV/OV/EV), SAN count, wildcard usage.
+##Certificate Summary:
+
+Issuer, validity window, certificate type (DV/OV/EV), SAN count, wildcard usage.
 
 ---
 
-Chain Analysis: Number of certificates in chain, intermediate CA identity, root CA identity, chain completeness.
+##Chain Analysis:
+
+Number of certificates in chain, intermediate CA identity, root CA identity, chain completeness.
 
 ---
 
-Termination Analysis: Where TLS appears to terminate (app server / load balancer / CDN) and the evidence that supports your conclusion.
+##Termination Analysis:
+
+Where TLS appears to terminate (app server / load balancer / CDN) and the evidence that supports your conclusion.
 
 ---
 
-TLS Configuration: SSL Labs grade, TLS versions, HSTS, OCSP stapling.
+##TLS Configuration: 
+
+SSL Labs grade, TLS versions, HSTS, OCSP stapling.
 
 ---
 
-CT Log Analysis: CA consistency, any unexpected issuers, certificate validity period pattern.
+##CT Log Analysis: 
+
+CA consistency, any unexpected issuers, certificate validity period pattern.
 
 ---
 
-Architecture Assessment: In 2–3 sentences, describe what this certificate deployment tells you about the organization's PKI architecture and operational approach. This is not a grade — it is an observation.
+##Architecture Assessment:
+
+In 2–3 sentences, describe what this certificate deployment tells you about the organization's PKI architecture and operational approach. This is not a grade — it is an observation.
 
 ---
 
