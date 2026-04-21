@@ -36,8 +36,6 @@ In this lab, I will be retrieving a live certificate from a well-known enterpris
 
 <img width="501" height="574" alt="Enterpries_cert" src="https://github.com/user-attachments/assets/11b85c49-6c03-4a02-ba8e-e638dadaf1a0" />
 
-
-
 ```
 
 ---
@@ -82,13 +80,7 @@ Examples:
 ---
 
 ## Artifacts
-List the files generated or submitted during this lab.
-
-Examples:
-
-- Any `.pem`, `.crt`, or `.key` files produced
-- Your completed lab write-up `.md` file
-- Screenshots stored in `assets/screenshots/`
+Enterprise_cert.pem, lab-01-enterprise-certificate.md
 
 ---
 
