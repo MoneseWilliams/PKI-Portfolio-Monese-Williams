@@ -76,8 +76,6 @@ In 2–3 sentences, describe what this certificate deployment tells you about th
 
 <img width="501" height="574" alt="Enterpries_cert" src="https://github.com/user-attachments/assets/11b85c49-6c03-4a02-ba8e-e638dadaf1a0" />
 
-```
-
 ---
 
 ## Key Findings
