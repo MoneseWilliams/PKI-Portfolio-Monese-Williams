@@ -13,7 +13,8 @@ In this lab, I will be retrieving a live certificate from a well-known enterpris
 
 3. Then, I went ahead and analyzed the full certificate chain. There are a total of three certificates in the chain. The leaf certificate is present, being the first certificate in the chain. The intermediate CA is also present, with the Subject being CN=DigiCert EV RSA CA G2. The chain then terminates at a public root CA named DigiCert Global Root G2, confirming that this chain is complete.
 
-4. Next, I determined where TLS terminates and whether there were any CDN or load balancer indicators using OpenSSL. The issuer field suggests that this is not a CDN-managed certificate, but rather a known public CA named DigiCert, since the issuer name does not indicate any CDN providers. There are also no CDN-related SAN entries or wildcard patterns in the SAN field, only one domain: DNS:capitalone.com. The server headers indicate that a load balancer is in the request path and not a CDN, with the server output showing BigIP and no CDN indicators. Overall, based on these findings, I determined that TLS most likely terminates at the load balancer for this deployment.
+4. Next, I determined where TLS terminates and whether there were any CDN or load balancer indicators using OpenSSL. The issuer does not suggest that this is a CDN-managed certificate. It is issued by DigiCert, which is a known public CA, but there are no indicators pointing to Cloudflare or Fastly. The subject field outputs O=Capital One Financial Corporation, CN=capitalone.com, which is the company name, and the SAN field populates one entry, DNS:capitalone.com, with no wildcards. Neither are CDN indicators, but both are load balancer indicators. The server output also includes “BigIP,” which is associated with F5 load balancers.
+
 
 5. Next, I decided to run an SSL analysis using https://www.ssllabs.com/ssltest/ for a complete TLS configuration report. The SSL Labs overall grade is an A+, meaning it has excellent security with strong configurations and supports TLS version 1.3. Deprecated TLS versions 1.0 and 1.1 are not supported under the Protocols tab. HSTS (HTTP Strict Transport Security) is configured, and OCSP stapling is also supported.
 
@@ -31,19 +32,20 @@ For this enterprise live certifacte the issuer is CN=DigiCert EV RSA CA G2, whic
 
 ## Chain Analysis:
 
-Number of certificates in chain, intermediate CA identity, root CA identity, chain completeness.
+During my chain analysis, 3 certificates populated within the chain: the live certificate matching the hostname CN=capitalone.com, with an issuer named CN=DigiCert EV RSA CA G2. The intermediate CA matches what’s populated in the leaf certificate’s subject field, CN=DigiCert EV RSA CA G2, meaning the correct intermediate CA has populated. The same applies for the intermediate CA issuer, CN=DigiCert Global Root G2, which matches the root CA certificate block subject field. The root CA subject and issuer fields both match, which also confirms this is a valid root CA for this chain, verifying the completion of this chain.
 
 ---
 
 ## Termination Analysis:
 
-Where TLS appears to terminate (app server / load balancer / CDN) and the evidence that supports your conclusion.
+During my analysis, I was able to determine that the TLS certificate appears to terminate at the load balancer because there are no CDN indicators within the subject or SAN field. For example, the subject field presents the company’s name (O=Capital One Financial Corporation, CN=capitalone.com) and not a third party, and the SAN entry (DNS:capitalone.com) shows one domain with no wildcards. The certificate was also issued directly to the company, confirming that the company has control of the TLS. The server output also includes “BigIP,” which is associated with F5 load balancers whhch based on these indicators, TLS most likely terminates at the load balancer.
 
 ---
 
 ## TLS Configuration: 
 
 SSL Labs grade, TLS versions, HSTS, OCSP stapling.
+
 
 ---
 
