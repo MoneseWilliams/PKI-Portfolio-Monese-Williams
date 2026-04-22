@@ -18,7 +18,7 @@ In this lab, I will be retrieving a live certificate from a well-known enterpris
 
 5. Next, I decided to run an SSL analysis using https://www.ssllabs.com/ssltest/ for a complete TLS configuration report. The SSL Labs overall grade is an A+, meaning it has excellent security with strong configurations and supports TLS version 1.3. Deprecated TLS versions 1.0 and 1.1 are not supported under the Protocols tab. HSTS (HTTP Strict Transport Security) is configured, and OCSP stapling is also supported.
 
-6. Lastly, I checked the certificate transparency logs to understand how long the organization has been using this CA and to see if there are any unexpected issuers. I used the site https://crt.sh, and after searching my chosen enterprise hostname, www.capitalone.com, I saw that there are approximately 100 certificates that have been issued for this domain. Recent issuers, such as CN=DigiCert EV RSA CA G2, have been consistent for this domain, but different CAs have also been used, including DigiCert Global G3 TLS ECC SHA384 2020 CA1, CN=DigiCert SHA2 Extended Validation Server CA, and Symantec Trust Network, CN=Symantec Class 3 EV SSL CA - G3. There are also some older or unfamiliar issuers in the CT logs, such as CN=Symantec Class 3 EV SSL CA - G3, which could indicate that this certificate authority is no longer in active use. The approximate validity period of the most recent certificates is around 1 to 2 years, since DigiCert is a paid CA and most paid certificates follow a 1 to 2 year validity pattern.
+6. Lastly, I checked the certificate transparency logs to understand how long the organization has been using this CA and to see if there are any unexpected issuers. I used the site https://crt.sh, and after searching my chosen enterprise hostname, www.capitalone.com, I saw that there are approximately 100 certificates that have been issued for this domain. Recent issuers, such as CN=DigiCert EV RSA CA G2, have been consistent for this domain, but different CAs have also been used, including DigiCert Global G3 TLS ECC SHA384 2020 CA1, CN=DigiCert SHA2 Extended Validation Server CA, and Symantec Trust Network, CN=Symantec Class 3 EV SSL CA - G3. There are also some older or unfamiliar issuers in the CT logs, such as CN=Symantec Class 3 EV SSL CA - G3, which could indicate that this certificate authority is no longer in active use. The approximate validity period of the most recent certificates is around 1 year, since DigiCert is a paid CA and most paid certificates follow a 1 year validity pattern.
 
 ---
 
@@ -44,14 +44,18 @@ During my analysis, I was able to determine that the TLS certificate appears to 
 
 ## TLS Configuration: 
 
-SSL Labs grade, TLS versions, HSTS, OCSP stapling.
+For the TLS configuration, I ran an SSL Labs analysis using https://www.ssllabs.com/ssltest/. The SSL Labs overall grade for the capitalone.com certificate is an A+, meaning it has excellent security with strong configurations and supports TLS version 1.3. Deprecated TLS versions 1.0 and 1.1 are not supported, as shown under the Protocols tab. HSTS (HTTP Strict Transport Security) is configured, and OCSP stapling is also supported.
 
 
 ---
 
 ## CT Log Analysis: 
 
-CA consistency, any unexpected issuers, certificate validity period pattern.
+CA consistency, any unexpected issuers, certificate validity period pattern. 
+
+For the CT Log Analysis, I used the site https://crt.sh. I searched my chosen enterprise hostname, www.capitalone.com, and was able to determine that there are approximately 100 certificates that have been issued for this domain. Recent issuers, such as CN=DigiCert EV RSA CA G2, were used consistently for this domain. Different CAs have also been used, including DigiCert Global G3 TLS ECC SHA384 2020 CA1, CN=DigiCert SHA2 Extended Validation Server CA, and Symantec Trust Network, CN=Symantec Class 3 EV SSL CA - G3.
+
+There are also some older or unfamiliar issuers in the CT logs, such as CN=Symantec Class 3 EV SSL CA - G3, which could indicate that this certificate authority is no longer in active use. The approximate validity period of the most recent certificates is around 1 year, which aligns with current industry standards for publicly trusted TLS certificates.
 
 ---
 
