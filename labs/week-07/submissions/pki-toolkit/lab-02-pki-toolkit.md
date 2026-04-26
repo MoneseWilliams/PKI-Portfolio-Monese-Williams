@@ -13,10 +13,43 @@ Completed: March 2026
 ## Core Command-Line Tools
 
 ### openssl x509
-[entry]
+
+## openssl x509 — Parse the certificate
+
+**What it does:**
+This tool is used to parse an X.509 certificate so you can view important details such as certificate extensions, the issuer, and the subject fields.
+
+**When to use it:**
+It can be used for certificate analysis. It is also helpful for PKI diagnostic workflows when retrieving a live certificate and needing to view its details for troubleshooting.
+
+**Example command from my labs:**
+
+openssl x509 -in expired_cert.pem -text -noout
+
+**What the output tells you:**
+The output shows the issuer and subject information, the public key type, and the certificate extensions.
+
+**Phase 1 source:** Week 7, Enterpise Certificate Analysis
 
 ### openssl s_client
-[entry]
+
+## openssl s_client — Retrive Live Certificate
+
+**What it does:**
+This tool is used to retrieve a live certificate from a website or domain by connecting to the server and completing the TLS handshake.
+
+**When to use it:**
+It can be used in the event a certficates live cert needs to be pulled for a PKI diagnostic, 
+
+**Example command from my labs:**
+
+openssl x509 -in expired_cert.pem -text -noout
+
+**What the output tells you:**
+The output shows the issuer and subject information, the public key type, and the certificate extensions.
+
+**Phase 1 source:** Week 7, Enterpise Certificate Analysis
+
 
 ### openssl req
 [entry]
