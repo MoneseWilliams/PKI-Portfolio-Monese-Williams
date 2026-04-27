@@ -80,7 +80,7 @@ Overall, Phase 1 gave me a strong foundation, and I feel more confident continui
 - A complete certificate lifecycle from key generation through revocation
 - A PKI trust hierarchy with root CA, intermediate CA, and leaf certificate annotated
 
-**Visual file:** `reflections/visual/phase1-diagram.[ext]`
+**Visual file:** `reflections/visual/phase1-diagram.ext.png`
 
 This diagram shows the TLS 1.3 handshake between a client and a server. It starts with the client sending a Client Hello, followed by the server responding with sharing thier public key and certificate. during this process, the clients verifies the servers certifiacte using the certificate trust chain, which includes the intermediate and root ca. once verified succusfully, a secure session is establsihed, and the cleint and server can safleyly exchange HTTP requetes. This diagramshows how PKI, certificate and encryption all work together as on connected system.
 
