@@ -1,53 +1,42 @@
 # PKI Troubleshooting Runbook
 
-Submit this in your portfolio repository:
-`runbooks/pki-troubleshooting-runbook.md`
-
----
-
-## Before You Begin
-
-Review the **Challenges / Troubleshooting** section of each of your weekly lab submissions (`labs/week-01/` through `labs/week-07/`). Choose one scenario that was meaningful — something you had to diagnose, research, or work through. Your runbook documents that experience as a reusable reference.
-
 ---
 
 ## Title
 
-*Give your runbook a clear, specific name that describes the scenario.*
-
-> Example: *Certificate Verification Failure Due to Expired Intermediate CA*
-
-**Runbook title:**
+TLS Failure Due to SAN Hostname Mismatch
 
 ---
 
 ## Problem Statement
 
-*In one to two sentences: what did you expect to happen, and what happened instead?*
-
-> Write your response here.
+I expected the TLS connection to complete successfully when connecting to the server, but instead the connection failed due to a hostname mismatch error.
 
 ---
 
 ## Environment
 
-*Note the relevant context so someone reading this knows whether it applies to their situation.*
-
 **Tool(s) used:**
+
+- OpenSSL
+- Terminal
 
 **Certificate type or component involved:**
 
+- TLS Certificate
+- Subject Alternative Name (SAN)
+
 **Any relevant configuration details:**
+
+- Server hostname was changed but the certificate SAN field was not updated to include the new hostname
 
 ---
 
 ## Symptoms
 
-*List the specific signals that indicated something was wrong. Paste exact error messages or command output where possible.*
-
--
--
--
+- Browser warning 
+- TLS connection fails even though certificate appears valid
+- Certificate shows valid issuer and dates but still not trusted
 
 ---
 
@@ -55,7 +44,7 @@ Review the **Challenges / Troubleshooting** section of each of your weekly lab s
 
 *Walk through what you did to identify the root cause. Number each step. Include the exact commands you ran and what their output told you.*
 
-1.
+1. 
 2.
 3.
 
