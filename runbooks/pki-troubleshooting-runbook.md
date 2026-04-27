@@ -42,31 +42,31 @@ I expected the TLS connection to complete successfully when connecting to the se
 
 ## Diagnostic Steps
 
-*Walk through what you did to identify the root cause. Number each step. Include the exact commands you ran and what their output told you.*
+1. Retrieve the live certificate using (openssl s_client -connect [hostname]:443 2>/dev/null | openssl x509 -out [output_filename.pem]) and observe whether the certificate is retrieved successfully and whether the TLS connection shows any obvious errors.
 
-1. 
-2.
-3.
+2. Parse the certificate using (openssl x509 -in filename.pem -text -noout) and verify if the certificate is valid and not expired. Also check the Subject and SAN fields.
 
+3. Inspect the SAN field specifiaclly using (openssl x509 -in filename.pem -noout -text | grep -A5 "Subject Alternative Name") to confirm whether the requested hostname appears in the SAN field. If the hostname is missing, this confirms a hostname mismatch.
+
+4. Validate the chain using (openssl verify filename.pem) to confirm whether the certificate chain is valid or if the issue is related to trust chain validation.
+
+5. query the OCSP responder and check certficate revocation status using (openssl x509 -in [filename.pem] -text -noout | grep -A4 "Authority Information Access") to confirm revocation is not causing an additional issue with the TLS failure.
+   
 ---
 
 ## Resolution
 
-*Describe exactly what fixed the issue — the specific command, config change, or action taken.*
-
-> Write your response here.
+The issue was resolved by requesting and issuing a new certificate that includes the correct hostname in the SAN field. Once the updated certificate was installed on the server, the TLS connection was successfully established.
 
 ---
 
 ## Prevention Note
 
-*One to two sentences: how to avoid this issue in the future, or what to check first if it happens again.*
-
-> Write your response here.
+Always update and verify the SAN field when making hostname changes. Certificates should be reissued whenever a new hostname is introduced to avoid TLS failures.
 
 ---
 
-**Lab this scenario is drawn from:** `lab/XX-week-XX-[topic]/submissions/...`
+**Lab this scenario is drawn from:** `labs/week-06/submissions/san-mismatch/...`
 
 ---
 
