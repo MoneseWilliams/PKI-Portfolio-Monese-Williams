@@ -61,7 +61,7 @@ There are also some older or unfamiliar issuers in the CT logs, such as CN=Syman
 
 ## Architecture Assessment:
 
-This certificate deployment suggests that this organization has a well-managed architecture. This is supported by their strong TLS configuration and use of a trusted public CA. This indicates that the enterprise certificate is being handled in a controlled and organized way.
+This certificate deployment indicates that the certificate type is an extended validation (EV), meaning the organization’s identity is strictly verified, which enhances user trust. The TLS terminates at the F5 load balancer based on the server output showing "BigIP" in openssl.
 
 ---
 
