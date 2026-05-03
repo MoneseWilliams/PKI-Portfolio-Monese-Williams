@@ -44,7 +44,7 @@ During my analysis, I was able to determine that the TLS certificate appears to 
 
 ## TLS Configuration: 
 
-For the TLS configuration, I ran an SSL Labs analysis using https://www.ssllabs.com/ssltest/. The SSL Labs overall grade for the capitalone.com certificate is an A+, meaning it has excellent security with strong configurations and supports TLS version 1.3. Deprecated TLS versions 1.0 and 1.1 are not supported, as shown under the Protocols tab. HSTS (HTTP Strict Transport Security) is configured, and OCSP stapling is also supported.
+For the TLS configuration, I ran an SSL Labs analysis using https://www.ssllabs.com/ssltest/. The SSL Labs overall grade for the capitalone.com certificate is an A+, meaning it has excellent security with strong configurations,The server supports both TLS 1.3 and TLS 1.2, while deprecated versions such as TLS 1.0 and TLS 1.1 are not supported as shown under the Protocols tab. HSTS (HTTP Strict Transport Security) is configured, and OCSP stapling is also supported. 
 
 
 ---
