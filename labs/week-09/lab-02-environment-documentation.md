@@ -1,7 +1,7 @@
 # Lab 02: AD CS Console Exploration & CA Hierarchy Documentation
 
-**Student Name:**  
-**Date Completed:**  
+**Student Name:**  Monese Williams
+**Date Completed:**  5/15/2026
 **Phase:** 2 | **Week:** 9  
 **Submission Path:** `labs/week-09/lab-02-environment-documentation.md`
 
