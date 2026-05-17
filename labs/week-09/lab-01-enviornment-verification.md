@@ -10,21 +10,20 @@
 ## Step 1 – VM Startup & Login
 
 **VMs started in correct order (DC01 → PKI-SRV01 → Root-CA):**
-- [ ] Yes
-- [ ] No — describe what happened:
+- Yes
 
 **Login credentials used:**
 
 | VM | Account Used | Login Successful? |
 |----|-------------|-------------------|
-| DC01 | CORP\pki.admin | Yes / No |
-| PKI-SRV01 | CORP\pki.admin | Yes / No |
-| Root-CA | .\Administrator | Yes / No |
+| DC01 | CORP\pki.admin | Yes|
+| PKI-SRV01 | CORP\pki.admin | Yes|
+| Root-CA | .\Administrator | Yes|
 
 **Notes / issues encountered:**
 
 ```
-(enter notes here)
+Root-CA System did take a while to start up after inputting the password, Overall i encontoured no issues when starting up all 3 systems.
 ```
 
 ---
@@ -40,13 +39,15 @@ Test-Connection -ComputerName DC01 -Count 2
 **Output received:**
 
 ```
-(paste your output here)
+Source        Destination     IPV4Address      IPV6Address                              Bytes    Time(ms)
+------        -----------     -----------      -----------                              -----    --------
+PKI-SRV01     DC01            192.168.10.10                                             32       1
+PKI-SRV01     DC01            192.168.10.10                                             32       1
+
 ```
 
 **DC01 responded successfully:**
-- [ ] Yes
-- [ ] No — troubleshooting steps taken:
-
+- Yes
 ---
 
 ## Step 3 – CertSvc Service Status
@@ -60,14 +61,15 @@ Get-Service -Name CertSvc
 **Output received:**
 
 ```
-(paste your output here)
+Status   Name               DisplayName
+------   ----               -----------
+Running  CertSvc            Active Directory Certificate Services
 ```
 
-**CertSvc status shown:** ________________
+**CertSvc status shown:** Running
 
 **Service was Running:**
-- [ ] Yes
-- [ ] No — action taken:
+- Yes
 
 ---
 
@@ -82,7 +84,8 @@ Get-Service -Name CertSvc
 **Screenshot or description of what you observed in certsrv.msc:**
 
 ```
-(describe or reference your screenshot here)
+<img width="773" height="542" alt="Screenshot 2026-05-16 at 7 08 52 PM" src="https://github.com/user-attachments/assets/18e8f361-5083-4752-92f6-d7ad9fd05c0a" />
+
 ```
 
 ---
