@@ -1,7 +1,7 @@
 # Lab 01: Environment Verification & VM Connectivity Check
 
-**Student Name:**  
-**Date Completed:**  
+**Student Name:**  Monese Williams
+**Date Completed:**  5/16/2026
 **Phase:** 2 | **Week:** 9  
 **Submission Path:** `labs/week-09/lab-01-environment-verification.md`
 
