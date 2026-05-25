@@ -1,7 +1,7 @@
 # Lab 02: Issue Your First Certificate from a Custom Template
 
-**Student Name:**  
-**Date Completed:**  
+**Student Name:**  Monese Williams
+**Date Completed:**  5/24/2026
 **Phase:** 2 | **Week:** 10  
 **Submission Path:** `labs/week-10/lab-02-first-issuance.md`
 
@@ -16,14 +16,12 @@ Get-Service -Name CertSvc
 certutil -ping
 ```
 
-**CertSvc status:** ________________  
+**CertSvc status:** Running 
 **CA responding (certutil -ping):**
-- [ ] Yes
-- [ ] No — action taken:
+- [Yes] 
 
 **CVI-WebServer template visible in certtmpl.msc (from Lab 01):**
-- [ ] Yes
-- [ ] No — complete Lab 01 before proceeding
+- [Yes]
 
 ---
 
@@ -39,17 +37,19 @@ The CVI-WebServer template exists in Active Directory but is not yet published t
 4. Clicked **OK**
 
 **CVI-WebServer template now visible under Certificate Templates node:**
-- [ ] Yes
-- [ ] No — describe what happened:
-
+- [Yes] Yes
+- 
 ```
-(describe here)
+The duplicate template i created named CVI-WebServer successfully popultes under the certificate template node after issuing the template.
+
 ```
 
 **Screenshot or description of the Certificate Templates node showing CVI-WebServer:**
 
 ```
-(describe what you see in certsrv.msc)
+
+<img width="764" height="539" alt="cert nodes" src="https://github.com/user-attachments/assets/13ac62d4-69d6-46fd-bf3b-8ae370b72406" />
+
 ```
 
 ---
