@@ -40,7 +40,7 @@ The CVI-WebServer template exists in Active Directory but is not yet published t
 - [Yes] Yes
 - 
 ```
-The duplicate template i created named CVI-WebServer successfully popultes under the certificate template node after issuing the template.
+The duplicate template I created named CVI-WebServer successfully populated under the Certificate Templates node after issuing the template.
 
 ```
 
@@ -58,7 +58,7 @@ The duplicate template i created named CVI-WebServer successfully popultes under
 
 1. Opened **mmc.exe** → **File → Add/Remove Snap-in**
 2. Added **Certificates** snap-in
-3. Selected: ________________ (Computer account / My user account / Service account)
+3. Selected: My User Account (Computer account / My user account / Service account)
 4. Navigated to **Personal → Certificates**
 5. Right-clicked → **All Tasks → Request New Certificate**
 6. Proceeded through the Certificate Enrollment wizard
@@ -66,29 +66,44 @@ The duplicate template i created named CVI-WebServer successfully popultes under
 **Certificate Enrollment wizard — enrollment policy selected:**
 
 ```
-(Active Directory Enrollment Policy or other?)
+In the certificate enrollment wizzard the policy i selected is Active Directory Enrollment Policy.
 ```
 
 **Templates shown in the wizard:**
 
 ```
-(list all templates visible)
+User
+Computers
+
 ```
 
 **CVI-WebServer template visible:**
-- [ ] Yes
-- [ ] No — troubleshooting steps taken:
+- [ No] - troubleshooting steps taken: Based on the instructions given, I was advised to select “My user account” during the Add/Remove Snap-in process. However, once I went to request a new certificate and locate the duplicate template I created named CVI-WebServer, it populated as “Unavailable” with the error message: “This type of certificate can be issued only to a computer.”
+At first, I deleted my duplicate template, recreated it, republished it, and followed the steps again, but the same issue continued to happen. I then researched the issue and found that it could be related to enrollment policy caching. To troubleshoot further, I opened Command Prompt (CMD) as administrator and ran the commands:
+
+gpupdate /force
+and
+certutil -pulse
+
+These commands were used to force a Group Policy refresh and refresh the certificate autoenrollment policy. After running both commands, I attempted to request the new certificate again, but unfortunately the issue still did not resolve.
+
+After contacting a fellow classmate and the teacher’s assistant, I was advised not to select “My user account” during the Add/Remove Snap-in process as the instructions directed. Instead, I was told to choose “Computer account.” This made more sense because the error specifically stated that “This type of certificate can be issued only to a computer.”
+
+Once I selected “Computer account,” I chose “Local computer,” then navigated back to Certificates → Personal → Request New Certificate. I again selected Active Directory Enrollment Policy in the enrollment wizard, and the CVI-WebServer template populated successfully. There was still an error shown under the template, so I clicked the warning, went to the Subject tab, entered the Common Name as:
+
+CN=CVI-WebServer
+then clicked Apply and Enroll.
+
+The certificate enrollment then showed “Succeeded,” and my CVI-WebServer certificate now appears in the Personal certificate folder showing it was issued by CVI Issuing CA 1.
 
 **Subject name entered (if prompted):**
 
 ```
-(what subject name did you provide? or was it auto-populated?)
+The subjet name i provided is "CVI-WebServer"
 ```
 
 **Certificate request submitted:**
-- [ ] Yes — certificate issued immediately
-- [ ] Yes — certificate pending manager approval
-- [ ] No — error encountered:
+- [Yes] Yes — certificate issued immediately
 
 ```
 (paste error here if applicable)
@@ -106,22 +121,22 @@ Navigate to the Personal → Certificates store and double-click the issued cert
 
 | Field | Value |
 |-------|-------|
-| Issued to | |
-| Issued by | |
-| Valid from | |
-| Valid to | |
+| Issued to |CVI-WebServer|
+| Issued by |CVI Issuing CA 1|
+| Valid from |5/25/2026|
+| Valid to |4/25/2027|
 
 **Details tab — record the following fields:**
 
 | Field | Value |
 |-------|-------|
-| Serial Number | |
-| Signature Algorithm | |
-| Subject | |
-| Key Usage | |
-| Enhanced Key Usage | |
+| Serial Number |440000000344d2f0d2f2690164000000000003|
+| Signature Algorithm |sha256RSA|
+| Subject |CN = CVI-WebServer|
+| Key Usage |Digital Signature, Key Encipherment (a0)|
+| Enhanced Key Usage |Server Authentication (1.3.6.1.5.5.7.3.1)|
 | Subject Alternative Name (if present) | |
-| Thumbprint | |
+| Thumbprint |cfbcb10fadcc4ca02dbd4a8f2abb690238527bee|
 
 ---
 
@@ -138,7 +153,21 @@ Replace `<thumbprint>` with the thumbprint value (no spaces).
 **Full certutil output:**
 
 ```
-(paste output here)
+My "Personal"
+================ Certificate 0 ================
+Serial Number: 440000000344d2f0d2f2690164000000000003
+Issuer: CN=CVI Issuing CA 1, DC=corp, DC=cvilab, DC=local
+ NotBefore: 5/25/2026 10:44 AM
+ NotAfter: 4/25/2027 7:36 PM
+Subject: CN=CVI-WebServer
+Non-root Certificate
+Template: CVI-Webserver, CVI-WebServer
+Cert Hash(sha1): cfbcb10fadcc4ca02dbd4a8f2abb690238527bee
+  Key Container = 328fd61f6686e813648820cf5fc82916_f0a99c17-76d3-498a-97de-2992c06105fd
+  Provider = Microsoft RSA SChannel Cryptographic Provider
+Missing stored keyset
+CertUtil: -store command completed successfully.
+
 ```
 
 ---
@@ -148,17 +177,17 @@ Replace `<thumbprint>` with the thumbprint value (no spaces).
 Navigate to **certsrv.msc → CVI Issuing CA 1 → Issued Certificates**.
 
 **Does the certificate appear in the Issued Certificates node?**
-- [ ] Yes
+- [Yes] 
 
 **Record from the Issued Certificates node:**
 
 | Column | Value |
 |--------|-------|
-| Request ID | |
-| Requester Name | |
-| Certificate Template | |
-| Issued Common Name | |
-| Certificate Expiration Date | |
+| Request ID |3|
+| Requester Name |CORP\PKI-SRV01$|
+| Certificate Template |CVI-WebServer (1.3.6.1.4.1.311.21.8.158)|
+| Issued Common Name |CVI-WebServer|
+| Certificate Expiration Date |4/25/2026 7:36 PM|
 
 ---
 
@@ -172,27 +201,30 @@ Describe the full certificate issuance workflow in your own words. Cover:
 4. Where the issued certificate was placed and why
 
 ```
-(your write-up here — aim for 1–2 paragraphs, plain language)
+During this full certificate issuance, I first published my duplicate Web Server template named CVI-WebServer to Active Directory because even though the actual template already existed in AD, publishing it made it available for certificate requests through the CA. Next, I went to the MMC (Microsoft Management Console) and performed a certificate snap-in for my computer, which is best for manual requests. A CSR request then needed to be submitted through the enrollment wizard so the MMC wizard could submit a PKCS#10 Certificate Signing Request with the subject name and public key information and send this request to the issuing CA.
+
+Once the CSR was submitted to the issuing CA, the CA then performed a policy check, verifying the identity of the requester. Each check acted as a gateway to the next, and if all checks passed, the issuing CA then used its private key to sign the certificate and successfully issue it. Once the certificate was issued, it was placed in the local certificate store (Personal) because the certificate was issued locally through the computer account. After issuing, you always want to verify the information is correct, so within the Issued Certificates node in certsrv.msc, the information was verified and matched correctly. Also, in PowerShell, the command certutil -store My "thumbprint" displays all fields in the output, verifying the information matches the requested certificate as well.
+
 ```
 
 **One thing about the issuance process that you did not expect or want to understand better:**
 
 ```
-(your observation here)
+The issuance process that I did not expect and would like to understand better is what actually happens between the request and the certificate issuance. I also wonder if it is the same as the TLS handshake or if it is different since the certificate was being issued locally. Another thing I would like to understand better is why the duplicate template I created could only be used locally through the computer account instead of under “My user account” in MMC.
 ```
 
 ---
 
 ## Submission Checklist
 
-- [ ] Pre-lab verification completed
-- [ ] Part A: CVI-WebServer template published to CVI Issuing CA 1
-- [ ] Part A: Template visible in certsrv.msc Certificate Templates node — confirmed
-- [ ] Part B: Certificate requested via MMC — request submitted
-- [ ] Part B: Enrollment wizard observations documented
-- [ ] Part C: Certificate details recorded from MMC (General + Details tabs)
-- [ ] Part C: certutil -store My output pasted
-- [ ] Part C: Certificate confirmed in certsrv.msc Issued Certificates node
-- [ ] Part D: Issuance workflow write-up completed in own words
-- [ ] File saved as `lab-02-first-issuance.md`
-- [ ] File committed to portfolio repo under `labs/week-10/`
+- [yes] Pre-lab verification completed
+- [yes] Part A: CVI-WebServer template published to CVI Issuing CA 1
+- [yes] Part A: Template visible in certsrv.msc Certificate Templates node — confirmed
+- [yes] Part B: Certificate requested via MMC — request submitted
+- [yes] Part B: Enrollment wizard observations documented
+- [yes] Part C: Certificate details recorded from MMC (General + Details tabs)
+- [yes] Part C: certutil -store My output pasted
+- [yes] Part C: Certificate confirmed in certsrv.msc Issued Certificates node
+- [yes] Part D: Issuance workflow write-up completed in own words
+- [yes] File saved as `lab-02-first-issuance.md`
+- [yes] File committed to portfolio repo under `labs/week-10/`
