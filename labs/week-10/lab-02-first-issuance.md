@@ -46,11 +46,9 @@ The duplicate template i created named CVI-WebServer successfully popultes under
 
 **Screenshot or description of the Certificate Templates node showing CVI-WebServer:**
 
-```
 
-<img width="764" height="539" alt="cert nodes" src="https://github.com/user-attachments/assets/13ac62d4-69d6-46fd-bf3b-8ae370b72406" />
+<img width="764" height="539" alt="cert nodes" src="https://github.com/user-attachments/assets/9f328af1-bbf2-48b5-b73d-759864feea77" />
 
-```
 
 ---
 
