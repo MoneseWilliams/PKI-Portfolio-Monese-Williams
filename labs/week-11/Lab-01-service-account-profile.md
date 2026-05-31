@@ -1,7 +1,7 @@
 # Lab 01: Build a Certificate Profile for a Service Account
 
-**Student Name:**  
-**Date Completed:**  
+**Student Name:**  Monese Williams
+**Date Completed:**  5/30/2026
 **Phase:** 2 | **Week:** 11  
 **Submission Path:** `labs/week-11/lab-01-service-account-profile.md`
 
@@ -23,11 +23,10 @@ Get-ADUser -Identity svc.autoenroll -Properties UserPrincipalName | Select-Objec
 ```
 
 **All checks passed:**
-- [ ] Yes
-- [ ] No — describe the issue and how you resolved it:
+- [Yes]
 
 ```
-(describe here)
+All checks has passed with no issues and errors
 ```
 
 ---
@@ -38,17 +37,18 @@ Open the Certificate Templates console: **Run → certtmpl.msc**
 
 ### Template Duplication
 
-**Source template duplicated:** ________________ (recommended: User or Computer — document your choice)
+**Source template duplicated:** User (recommended: User or Computer — document your choice)
 
 **Reason for choosing this source template:**
 
 ```
-(your explanation here)
+I chose the User template because this certificate is being created for a service account and not a computer. Since a service account functions more like a user account in Active Directory, The User template was the best starting point for creating the CVI-ServiceAccount certificate template.
+
 ```
 
 **Compatibility settings selected:**
-- Certification Authority: ________________
-- Certificate Recipient: ________________
+- Certification Authority: Windows Server 2012 R2
+- Certificate Recipient: Windows 8.1 / Windows Server R2
 
 ### Design Decisions
 
@@ -58,10 +58,10 @@ Document every setting with a reason. This is the design record for the template
 
 | Key Usage | Included? | Reason |
 |-----------|-----------|--------|
-| Digital Signature | | |
-| Key Encipherment | | |
-| Data Encipherment | | |
-| Non-Repudiation | | |
+| Digital Signature |Yes| |
+| Key Encipherment |No| |
+| Data Encipherment |No| |
+| Non-Repudiation |No| |
 
 **Explanation of Key Usage decisions:**
 
