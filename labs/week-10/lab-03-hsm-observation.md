@@ -44,8 +44,8 @@ A PKCS#11 interface is used with HSMs to help generate and manage private keys. 
 | Item | Value |
 |------|-------|
 | Software used | SoftHSM2 (Windows) |
-| PKCS#11 library path | |
-| Companion tool used (key ceremony commands) | |
+| PKCS#11 library path |softhsm2.dll|
+| Companion tool used (key ceremony commands) |softhsm2-util|
 
 ---
 
@@ -69,20 +69,23 @@ PIN>
 **What this command does:**
 
 ```
-create a key container within the HSM which is called the security officer
+This command initialized Slot 0 with the CVI CA Key Store and created two PINs. One PIN is used when needing to perform signing operations, and the other PIN is used by the Security Officer, who controls the administrative operations.
 
 ```
 
 **Output or confirmation observed:**
 
 ```
-(paste or describe output)
+The output of this command shows that two PINs were created. One PIN created is the user PIN, and this is what the CA software presents when needing to perform signing operations. The second PIN, which is the SO PIN, was created for the Security Officer and is a separate credential that controls the administrative operations on the token. The PINs are used as part of the quorum.
+
+
 ```
 
 **Why this step is necessary:**
 
 ```
-This step is necessary because the Security Officer is the person responsible for creating and initializing the token. In production environments, the Security Officer role would typically be part of the quorum. This is important because it allows access to the private keys. The token acts like a key store, while the container is where the keys actually live.
+
+This is necessary because, in the real world, some people would have access to the administrative portion of operations, while others would have access to the signing portion of operations. This helps prevent one person from being able to do everything, which supports the best practice of least privilege and separation of duties.
 
 
 ```
@@ -101,13 +104,55 @@ softhsm2-util --show-slots
 **Output:**
 
 ```
-(paste output)
+The token has been initialized and is reassigned to slot 2076269524
+
+[toniawebster@Mac ~ % softhsm2-util --show-slots
+
+Available slots:
+Slot 2076269524
+    Slot info:
+        Description:      SoftHSM slot ID 0x7bc15bd4
+        Manufacturer ID:  SoftHSM project
+        Hardware version: 2.7
+        Firmware version: 2.7
+        Token present:    yes
+
+    Token info:
+        Manufacturer ID:  SoftHSM project
+        Model:            SoftHSM v2
+        Hardware version: 2.7
+        Firmware version: 2.7
+        Serial number:    1ae762c17bc15bd4
+        Initialized:      yes
+        User PIN init.:   yes
+        Label:            CVI-CAKeyStore
+
+Slot 1
+    Slot info:
+        Description:      SoftHSM slot ID 0x1
+        Manufacturer ID:  SoftHSM project
+        Hardware version: 2.7
+        Firmware version: 2.7
+        Token present:    yes
+
+    Token info:
+        Manufacturer ID:  SoftHSM project
+        Model:            SoftHSM v2
+        Hardware version: 2.7
+        Firmware version: 2.7
+        Serial number:
+        Initialized:      no
+        User PIN init.:   no
+        Label:
+
 ```
 
 **What did the output confirm?**
 
 ```
-(your observation)
+The output confirms that Slot 0 now has a serial number and a slot number associated with it. It tells you that it is still on Slot 0 and still has the same hardware and firmware versions, but now it shows that there is a token present. This confirms that Slot 0 has been initialized with a label named CVI-CAKeyStore.
+
+
 ```
 
 ---
@@ -127,21 +172,62 @@ pkcs11-tool --module <library> --login --pin
 
 | Parameter | Value |
 |-----------|-------|
-| Key type | |
-| Key size | |
-| Key label | |
-| Token | |
+| Key type |Private Key RSA|
+| Key size |2048|
+| Key label |CVI-IssCA-Key|
+| Token |0x7bc15bd4|
 
 **Output:**
 
 ```
-(paste output)
+Using slot 0 with a present token (0x7bc15bd4)
+
+Key pair generated:
+
+Private Key Object: RSA 2048 bits
+  Modulus:
+    c25cafd44e2efe5d2152d4dae6fcd8fdd585780d24abd011e71246c3f7473abd
+    34a7d49320f3e26ff796ee2926c9aa5330412047797ec137fc88e0d947359828
+    ae2b375cf2348a12e873484256f961583e571c25b18acaaa107d30bcbb1c5974
+    d6bc7ebb65abcced425328936b2934ea8f0cddbe19a2b0b6f0729339553df9cb
+    f5c0d372aa868eb9ddc03b4ddb20b47be5a38854fb673ef429a2cbd923278531
+    473e1b86318a07d5f6c438af66956495ef9da88b334b5886488519251850e804
+    575fc0f70436bf657bba23f56bb64333cb69517430299fceac45cc1d72e685ae
+    32047624a3ce4f2236bd08ff2c23af31f3ff7d45de294113f2687ddba161cef5
+
+  Public exp: 65537 (0x010001)
+  label:      CVI-IssCA-Key
+  ID:         1 (0x01)
+  Usage:      decrypt, sign, signRecover, unwrap
+  Access:     sensitive, always sensitive, never extractable, local
+  URI:        pkcs11:model=SoftHSM%20v2;manufacturer=SoftHSM%20project;serial=1ae762c17bc15bd4;token=CVI-CAKeyStore;id=%01;object=CVI-IssCA-Key;type=private
+
+Public Key Object: RSA 2048 bits
+  Modulus:
+    c25cafd44e2efe5d2152d4dae6fcd8fdd585780d24abd011e71246c3f7473abd
+    34a7d49320f3e26ff796ee2926c9aa5330412047797ec137fc88e0d947359828
+    ae2b375cf2348a12e873484256f961583e571c25b18acaaa107d30bcbb1c5974
+    d6bc7ebb65abcced425328936b2934ea8f0cddbe19a2b0b6f0729339553df9cb
+    f5c0d372aa868eb9ddc03b4ddb20b47be5a38854fb673ef429a2cbd923278531
+    473e1b86318a07d5f6c438af66956495ef9da88b334b5886488519251850e804
+    575fc0f70436bf657bba23f56bb64333cb69517430299fceac45cc1d72e685ae
+    32047624a3ce4f2236bd08ff2c23af31f3ff7d45de294113f2687ddba161cef5
+
+  Public exp: 65537 (0x010001)
+  label:      CVI-IssCA-Key
+  ID:         1 (0x01)
+  Usage:      encrypt, verify, verifyRecover, wrap
+  Access:     local
+  URI:        pkcs11:model=SoftHSM%20v2;manufacturer=SoftHSM%20project;serial=1ae762c17bc15bd4;token=CVI-CAKeyStore;id=%01;object=CVI-IssCA-Key;type=public
+
 ```
 
 **What this step accomplished:**
 
 ```
-(your explanation)
+It generated a new signing key pair, consisting of a private key and a public key, for the new Issuing CA. It can now be used to decrypt, sign, and recover data. The private key is not extractable, meaning it cannot be taken from the HSM or exported.
+
+
 ```
 
 ---
@@ -159,13 +245,51 @@ pkcs11-tool --module <library> --login --pin
 **Output:**
 
 ```
-(paste output)
+Using slot 0 with a present token (0x7bc15bd4)
+
+Public Key Object: RSA 2048 bits
+  Modulus:
+    c25cafd44e2efe5d2152d4dae6fcd8fdd585780d24abd011e71246c3f7473abd
+    34a7d49320f3e26ff796ee2926c9aa5330412047797ec137fc88e0d947359828
+    ae2b375cf2348a12e873484256f961583e571c25b18acaaa107d30bcbb1c5974
+    d6bc7ebb65abcced425328936b2934ea8f0cddbe19a2b0b6f0729339553df9cb
+    f5c0d372aa868eb9ddc03b4ddb20b47be5a38854fb673ef429a2cbd923278531
+    473e1b86318a07d5f6c438af66956495ef9da88b334b5886488519251850e804
+    575fc0f70436bf657bba23f56bb64333cb69517430299fceac45cc1d72e685ae
+    32047624a3ce4f2236bd08ff2c23af31f3ff7d45de294113f2687ddba161cef5
+
+  Public exp: 65537 (0x010001)
+  label:      CVI-IssCA-Key
+  ID:         1 (0x01)
+  Usage:      encrypt, verify, verifyRecover, wrap
+  Access:     local
+  uri:        pkcs11:model=SoftHSM%20v2;manufacturer=SoftHSM%20project;serial=1ae762c17bc15bd4;token=CVI-CAKeyStore;id=%01;object=CVI-IssCA-Key;type=public
+
+Private Key Object: RSA 2048 bits
+  Modulus:
+    c25cafd44e2efe5d2152d4dae6fcd8fdd585780d24abd011e71246c3f7473abd
+    34a7d49320f3e26ff796ee2926c9aa5330412047797ec137fc88e0d947359828
+    ae2b375cf2348a12e873484256f961583e571c25b18acaaa107d30bcbb1c5974
+    d6bc7ebb65abcced425328936b2934ea8f0cddbe19a2b0b6f0729339553df9cb
+    f5c0d372aa868eb9ddc03b4ddb20b47be5a38854fb673ef429a2cbd923278531
+    473e1b86318a07d5f6c438af66956495ef9da88b334b5886488519251850e804
+    575fc0f70436bf657bba23f56bb64333cb69517430299fceac45cc1d72e685ae
+    32047624a3ce4f2236bd08ff2c23af31f3ff7d45de294113f2687ddba161cef5
+
+  Public exp: 65537 (0x010001)
+  label:      CVI-IssCA-Key
+  ID:         1 (0x01)
+  Usage:      decrypt, sign, signRecover, unwrap
+  Access:     sensitive, always sensitive, never extractable, local
+  uri:        pkcs11:model=SoftHSM%20v2;manufacturer=SoftHSM%20project;serial=1ae762c17bc15bd4;token=CVI-CAKeyStore;id=%01;object=CVI-IssCA-Key;type=private
+
 ```
 
 **What the output proves:**
 
 ```
-(describe what it demonstrates about where the key lives)
+The output demonstrated that the key lives in the HSM. It shows that the key is stored within the token and that the private key is marked as never extractable, meaning it cannot be exported from the HSM.
+
 ```
 
 ---
@@ -199,18 +323,19 @@ Fill in the table based on the lesson and demonstration:
 
 | Dimension | SoftHSM2 (Demo) | Thales Luna (Enterprise) |
 |-----------|-----------------|--------------------------|
-| Key storage location | Software (filesystem) | |
-| Tamper resistance | None | |
-| PKCS#11 interface | Same | |
-| FIPS validation | Not applicable | |
-| Used in production CAs | No — simulation only | |
-| Cost | Free / open source | |
+| Key storage location | Software (filesystem) |Hardware Device HSM|
+| Tamper resistance | None |Tamper Resistant|
+| PKCS#11 interface | Same |Same|
+| FIPS validation | Not applicable |Validated|
+| Used in production CAs | No — simulation only |Yes|
+| Cost | Free / open source |Expensive Hardware|
 | Required for a CA private key | No | Common in enterprise PKI |
 
 **In your own words: what does a physical HSM protect against that SoftHSM2 cannot?**
 
 ```
-(your answer here — 2–3 sentences)
+A physical HSM protects against potential attackers who somehow gain access to the server and private key. Unlike SoftHSM2, the private key cannot be extracted or copied from the HSM.
+
 ```
 
 ---
@@ -222,13 +347,15 @@ Fill in the table based on the lesson and demonstration:
 In your own words, describe what a key ceremony is and why enterprise PKI deployments conduct them with multiple administrators present:
 
 ```
-(your answer — 3–5 sentences)
+A key ceremony is the process of creating and protecting a CA's private key. Enterprise PKI deployments conduct key ceremonies with multiple administrators present so that one person does not have complete control over the process. This helps enforce separation of duties and reduces the risk of abuse or mistakes. The ceremony is usually documented to prove that proper security procedures were followed.
+
 ```
 
 **What would be different about this ceremony if CVI Issuing CA 1 were using a physical HSM?**
 
 ```
-(your answer — think about: who would be in the room, what physical steps would be required, what documentation would be produced)
+If CVI Issuing CA 1 were using a physical HSM, multiple administrators would be present in the room during the key generation process. Physical security steps would be required, such as using administrator smart cards, tokens, or quorum authentication to access the HSM. The private key would be generated directly inside the HSM and would never leave the device. Documentation would be created to record who was present, what actions were performed, and that the ceremony was completed successfully.
+
 ```
 
 ---
@@ -242,13 +369,15 @@ CVI Issuing CA 1 in your lab environment stores its private key in software (the
 **What is the operational risk of a software-stored CA private key vs. an HSM-protected key?**
 
 ```
-(your answer)
+The operational risk of a software-stored CA private key is that an attacker who gains administrative access to the server may be able to copy or steal the private key. With an HSM-protected key, the private key cannot be extracted from the device, which provides much stronger protection.
+
 ```
 
 **When you back up the CA in Week 13, what specific step is more sensitive because the private key is software-protected?**
 
 ```
-(your answer — think about what certutil -backup exports)
+When backing up the CA in Week 13, the most sensitive step is exporting the CA backup because certutil -backup can include the software-protected private key. If that backup falls into the wrong hands, the CA private key could potentially be compromised.
+
 ```
 
 ---
@@ -258,27 +387,29 @@ CVI Issuing CA 1 in your lab environment stores its private key in software (the
 **The most important thing you took away from this demonstration:**
 
 ```
-(your answer)
+The most important thing I took away from this demonstration is the difference between a software-protected key and an HSM-protected key. I learned that with an HSM, the private key stays inside the device and cannot be exported, while a software-protected key can potentially be copied if an attacker gains access to the server.
+
 ```
 
 **One question the demonstration raised that you want to understand better:**
 
 ```
-(your question)
+One question this demonstration raised is how organizations back up and recover HSM-protected keys if the HSM fails or is destroyed, since the private key cannot be exported from the device.
+
 ```
 
 ---
 
 ## Submission Checklist
 
-- [ ] Part A: SoftHSM2 and PKCS#11 described in own words
-- [ ] Part B: All ceremony steps documented — commands, outputs, explanations
-- [ ] Part C: SoftHSM2 vs. Thales Luna comparison table completed
-- [ ] Part C: Physical HSM protection question answered
-- [ ] Part D: Key ceremony concept explained in own words
-- [ ] Part D: Enterprise ceremony differences described
-- [ ] Part E: Software key vs. HSM key risk addressed
-- [ ] Part E: Connection to Week 13 backup noted
-- [ ] Reflection completed
-- [ ] File saved as `lab-03-hsm-observation.md`
-- [ ] File committed to portfolio repo under `labs/week-10/`
+- [Yes] Part A: SoftHSM2 and PKCS#11 described in own words
+- [Yes] Part B: All ceremony steps documented — commands, outputs, explanations
+- [Yes] Part C: SoftHSM2 vs. Thales Luna comparison table completed
+- [Yes] Part C: Physical HSM protection question answered
+- [Yes] Part D: Key ceremony concept explained in own words
+- [Yes] Part D: Enterprise ceremony differences described
+- [Yes] Part E: Software key vs. HSM key risk addressed
+- [Yes] Part E: Connection to Week 13 backup noted
+- [Yes] Reflection completed
+- [Yes] File saved as `lab-03-hsm-observation.md`
+- [Yes] File committed to portfolio repo under `labs/week-10/`
