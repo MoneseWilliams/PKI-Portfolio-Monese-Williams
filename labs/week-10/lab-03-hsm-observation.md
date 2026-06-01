@@ -24,7 +24,9 @@ Your task: observe each step, document what the instructor ran, what it produced
 In your own words, describe what SoftHSM2 is and why it is being used for this demonstration instead of a physical HSM:
 
 ```
-(your answer here)
+A SoftHSM2 is more like files being stored on disk. The private key is stored on disk rather than in hardware and is exportable if configured to allow it. It is being used for this demonstration instead of a physical HSM because it's not really about the certificates themselves. It's more about what an attacker can do if they gain access to the server. SoftHSM2 is not a good choice for production environments because it can be copied off a server by anyone with administrative access, while HSM keys physically cannot. Once a private key is generated inside an HSM, you cannot even see the key itself.
+
+
 ```
 
 **What is PKCS#11?**
@@ -32,7 +34,9 @@ In your own words, describe what SoftHSM2 is and why it is being used for this d
 In your own words, describe what the PKCS#11 interface is:
 
 ```
-(your answer here)
+A PKCS#11 interface is used with HSMs to help generate and manage private keys. It is used for smart cards, HSMs, and security tokens. The CA would use the PKCS#11 interface to communicate with the HSM and perform cryptographic operations such as signing, decryption, and key generation instead of giving out the private key.
+
+
 ```
 
 **HSM being simulated in this demo:**
@@ -56,13 +60,17 @@ Document each step of the ceremony as the instructor runs it. Record the command
 **Command run by instructor:**
 
 ```
-(paste or type the exact command here)
+softhsm2-util --init-token --slot 0 --label "CVI-
+CAKeyStore" --so-pin <SO-PIN> --pin <user-
+PIN>
+
 ```
 
 **What this command does:**
 
 ```
-(describe in your own words)
+create a key container within the HSM which is called the security officer
+
 ```
 
 **Output or confirmation observed:**
@@ -74,7 +82,9 @@ Document each step of the ceremony as the instructor runs it. Record the command
 **Why this step is necessary:**
 
 ```
-(your explanation)
+This step is necessary because the Security Officer is the person responsible for creating and initializing the token. In production environments, the Security Officer role would typically be part of the quorum. This is important because it allows access to the private keys. The token acts like a key store, while the container is where the keys actually live.
+
+
 ```
 
 ---
@@ -84,7 +94,8 @@ Document each step of the ceremony as the instructor runs it. Record the command
 **Command run:**
 
 ```
-(paste command)
+softhsm2-util --show-slots 
+
 ```
 
 **Output:**
@@ -106,7 +117,10 @@ Document each step of the ceremony as the instructor runs it. Record the command
 **Command run:**
 
 ```
-(paste command)
+pkcs11-tool --module <library> --login --pin
+<user-PIN> --keypairgen --key-type RSA:2048
+--label "CVI-IssCA-Key" --id 01
+
 ```
 
 **Key parameters used (record what you observed):**
@@ -137,7 +151,9 @@ Document each step of the ceremony as the instructor runs it. Record the command
 **Command run:**
 
 ```
-(paste command)
+pkcs11-tool --module <library> --login --pin
+<user-PIN> --list-objects
+
 ```
 
 **Output:**
@@ -161,13 +177,16 @@ Document each step of the ceremony as the instructor runs it. Record the command
 **Command:**
 
 ```
-(paste command)
+softhsm2-util --show-slots
+
 ```
 
 **What it showed:**
 
 ```
-(your observation)
+It showed the slots on the software, the manufacturer, and the hardware versions. It also showed the token that had not been initialized, meaning there is no private key associated with that token and it is a clean token. It also shows the token information and how there is no PIN associated with it. It's just a clean Slot 0.
+
+
 ```
 
 ---
