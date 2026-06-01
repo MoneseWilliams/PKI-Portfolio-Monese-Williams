@@ -1,7 +1,7 @@
 # Lab 03: HSM Key Ceremony — Observation Report
 
-**Student Name:**  
-**Date Completed:**  
+**Student Name:**  Monese Williams
+**Date Completed:**  5/31/2026
 **Phase:** 2 | **Week:** 10  
 **Submission Path:** `labs/week-10/lab-03-hsm-observation.md`
 
